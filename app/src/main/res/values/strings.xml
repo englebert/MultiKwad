@@ -1,0 +1,78 @@
+<resources>
+    <!-- Main Screen -->
+    <string name="app_name">MultiKwad Configuration Tool</string>
+    <string name="label_profile_id">Profile ID: XXX</string>
+    <string name="label_roll">ROLL:</string>
+    <string name="label_pitch">PITCH:</string>
+    <string name="label_yaw">YAW:</string>
+    <string name="label_alt">ALT:</string>
+    <string name="label_pos">POS:</string>
+    <string name="label_posr">POSR:</string>
+    <string name="label_navr">NAVR:</string>
+    <string name="label_level">LEVEL:</string>
+    <string name="label_mag">MAG:</string>
+    <string name="label_rc_throttle_mid">MID:</string>
+    <string name="label_rc_throttle_expo">EXPO:</string>
+    <string name="label_rc_pitch_roll_rate">RATE:</string>
+    <string name="label_rc_pitch_roll_expo">EXPO:</string>
+    <string name="label_pitch_roll_rate">PRATE:</string>
+    <string name="label_yaw_rate">YRATE:</string>
+    <string name="label_tpa_rate">TPA:</string>
+    <string name="label_p">P</string>
+    <string name="label_i">I</string>
+    <string name="label_d">D</string>
+    <string name="label_nil">NIL</string>
+    <string name="label_button_read">READ</string>
+    <string name="label_button_reset">RESET</string>
+    <string name="label_button_start">START</string>
+    <string name="label_button_stop">STOP</string>
+    <string name="label_button_write">WRITE</string>
+    <string name="label_button_settings">SETTINGS</string>
+    <string name="label_button_exit">EXIT</string>
+    <string name="label_button_calib_mac">C MAG</string>
+    <string name="label_button_calib_acc">C ACC</string>
+    <string name="label_button_flight_mode">&gt;</string>
+
+    <!-- Settings Screen -->
+    <string name="label_s_arm">ARM</string>
+    <string name="label_s_angle">ANGLE</string>
+    <string name="label_s_horizon">HORIZON</string>
+    <string name="label_s_baro">BARO</string>
+    <string name="label_s_vario">VARIO</string>
+    <string name="label_s_mag">MAG</string>
+    <string name="label_s_headfree">HEADFREE</string>
+    <string name="label_s_headadj">HEADADJ</string>
+    <string name="label_s_camstab">CAMSTAB</string>
+    <string name="label_s_camtrig">CAMTRIG</string>
+    <string name="label_s_gpshome">GPSHOME</string>
+    <string name="label_s_gpshold">GPSHOLD</string>
+    <string name="label_s_passthru">PASSTHRU</string>
+    <string name="label_s_beeper">BEEPER</string>
+    <string name="label_s_ledmax">LEDMAX</string>
+    <string name="label_s_ledlow">LEDLOW</string>
+    <string name="label_s_landing_lights">LLIGHTS</string>
+    <string name="label_s_calib">CALIB</string>
+    <string name="label_s_governor">GOVERNOR</string>
+    <string name="label_s_osdsw">OSD SW</string>
+    <string name="label_s_mission">MISSION</string>
+    <string name="label_s_land">LAND</string>
+    <string name="label_s_low">L</string>
+    <string name="label_s_medium">M</string>
+    <string name="label_s_high">H</string>
+    <string name="label_s_aux1">AUX1</string>
+    <string name="label_s_aux2">AUX2</string>
+    <string name="label_s_aux3">AUX3</string>
+    <string name="label_s_aux4">AUX4</string>
+
+    <!-- Communication Settings -->
+    <string name="label_button_bluetooth">BLUETOOTH</string>
+    <string name="label_button_otg_serialport">OTG SERIAL PORT</string>
+    <string name="label_communication_selection">Please select which port to communicate with the Flight Controller:</string>
+
+    <!-- Common values -->
+    <string name="default_0">0</string>
+    <string name="default_0_0">0.0</string>
+    <string name="default_0_00">0.00</string>
+    <string name="default_0_000">0.000</string>
+    <string name="log_id">MKWAD</string>
+</resources>

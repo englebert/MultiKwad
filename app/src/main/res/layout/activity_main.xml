@@ -1,0 +1,896 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/labelApplicationTitle"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/labelProfileID"
+        android:background="@drawable/rounded_corner"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/labelApplicationTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:text="@string/label_profile_id"
+        android:textAlignment="textStart"
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp" />
+
+    <!-- Primary PID controls -->
+    <RelativeLayout
+        android:id="@+id/layoutPrimaryPIDControls"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/labelProfileID"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/custom_border">
+
+        <TextView
+            android:id="@+id/labelP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/editRollPValue"
+            android:layout_alignStart="@+id/editRollPValue"
+            android:layout_marginLeft="30dp"
+            android:text="@string/label_p"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/labelI"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="70dp"
+            android:layout_toEndOf="@+id/labelP"
+            android:text="@string/label_i"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/labelD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="70dp"
+            android:layout_toEndOf="@+id/labelI"
+            android:text="@string/label_d"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!-- Roll -->
+        <TextView
+            android:id="@+id/labelRoll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="@string/label_roll"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editRollPValue"
+            android:background="@drawable/rounded_corner_white"
+            android:inputType="numberDecimal"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/labelRoll"
+            android:layout_toEndOf="@+id/labelRoll"
+            android:layout_marginLeft="10dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/default_0_0"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/editRollIValue"
+            android:background="@drawable/rounded_corner_white"
+            android:inputType="numberDecimal"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/labelRoll"
+            android:layout_toEndOf="@+id/editRollPValue"
+            android:layout_marginLeft="10dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/default_0_000"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/editRollDValue"
+            android:background="@drawable/rounded_corner_white"
+            android:inputType="numberDecimal"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/labelRoll"
+            android:layout_toEndOf="@+id/editRollIValue"
+            android:layout_marginLeft="10dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/default_0"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp" />
+
+        <!-- Pitch -->
+        <TextView
+            android:id="@+id/labelPitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/labelRoll"
+            android:layout_marginTop="5dp"
+            android:text="@string/label_pitch"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editPitchPValue"
+            android:background="@drawable/rounded_corner_white"
+            android:inputType="numberDecimal"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/labelPitch"
+            android:layout_alignLeft="@+id/editRollPValue"
+            android:layout_centerHorizontal="true"
+            android:text="@string/default_0_0"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/editPitchIValue"
+            android:background="@drawable/rounded_corner_white"
+            android:inputType="numberDecimal"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/labelPitch"
+            android:layout_toEndOf="@+id/editPitchPValue"
+            android:layout_marginLeft="10dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/default_0_000"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/editPitchDValue"
+            android:background="@drawable/rounded_corner_white"
+            android:inputType="numberDecimal"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/labelPitch"
+            android:layout_toEndOf="@+id/editPitchIValue"
+            android:layout_marginLeft="10dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/default_0"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp" />
+
+        <!-- Yaw -->
+        <TextView
+            android:id="@+id/labelYaw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/labelPitch"
+            android:layout_marginTop="5dp"
+            android:text="@string/label_yaw"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editYawPValue"
+            android:background="@drawable/rounded_corner_white"
+            android:inputType="numberDecimal"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/labelYaw"
+            android:layout_alignLeft="@+id/editPitchPValue"
+            android:layout_centerHorizontal="true"
+            android:text="@string/default_0_0"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/editYawIValue"
+            android:background="@drawable/rounded_corner_white"
+            android:inputType="numberDecimal"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/labelYaw"
+            android:layout_toEndOf="@+id/editYawPValue"
+            android:layout_marginLeft="10dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/default_0_000"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/editYawDValue"
+            android:background="@drawable/rounded_corner_white"
+            android:inputType="numberDecimal"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/labelYaw"
+            android:layout_toEndOf="@+id/editYawIValue"
+            android:layout_marginLeft="10dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/default_0"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp" />
+
+        <!-- Alt -->
+        <TextView
+            android:id="@+id/labelAlt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/labelYaw"
+            android:layout_marginTop="5dp"
+            android:text="@string/label_alt"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editAltPValue"
+            android:background="@drawable/rounded_corner_white"
+            android:inputType="numberDecimal"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/labelAlt"
+            android:layout_alignLeft="@+id/editYawPValue"
+            android:layout_centerHorizontal="true"
+            android:text="@string/default_0_0"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/editAltIValue"
+            android:background="@drawable/rounded_corner_white"
+            android:inputType="numberDecimal"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/labelAlt"
+            android:layout_toEndOf="@+id/editAltPValue"
+            android:layout_marginLeft="10dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/default_0_000"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/editAltDValue"
+            android:background="@drawable/rounded_corner_white"
+            android:inputType="numberDecimal"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/labelAlt"
+            android:layout_toEndOf="@+id/editAltIValue"
+            android:layout_marginLeft="10dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/default_0"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+    <!-- Navigation PID controls -->
+    <RelativeLayout
+        android:id="@+id/layoutNavigationPIDControls"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layoutPrimaryPIDControls"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/custom_border">
+
+        <!-- Pos -->
+        <TextView
+            android:id="@+id/labelPos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="5dp"
+            android:text="@string/label_pos"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editPosPValue"
+            android:background="@drawable/rounded_corner_white"
+            android:inputType="numberDecimal"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/labelPos"
+            android:layout_toEndOf="@+id/labelPos"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="18dp"
+            android:text="@string/default_0_00"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/editPosIValue"
+            android:background="@drawable/rounded_corner_white"
+            android:inputType="numberDecimal"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/labelPos"
+            android:layout_toEndOf="@+id/editPosPValue"
+            android:layout_marginLeft="10dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/default_0_0"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp" />
+
+        <!-- PosR -->
+        <TextView
+            android:id="@+id/labelPosR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/labelPos"
+            android:layout_alignStart="@+id/labelPos"
+            android:layout_marginTop="5dp"
+            android:text="@string/label_posr"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editPosRPValue"
+            android:background="@drawable/rounded_corner_white"
+            android:inputType="numberDecimal"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/labelPosR"
+            android:layout_alignStart="@+id/editPosPValue"
+            android:text="@string/default_0_0"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/editPosRIValue"
+            android:background="@drawable/rounded_corner_white"
+            android:inputType="numberDecimal"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/editPosRPValue"
+            android:layout_alignTop="@+id/labelPosR"
+            android:layout_marginLeft="10dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/default_0_00"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/editPosRDValue"
+            android:background="@drawable/rounded_corner_white"
+            android:inputType="numberDecimal"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/editPosRIValue"
+            android:layout_alignTop="@+id/labelPosR"
+            android:layout_marginLeft="10dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/default_0_000"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp" />
+
+        <!-- NavR -->
+        <TextView
+            android:id="@+id/labelNavR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/labelPosR"
+            android:layout_alignStart="@+id/labelPos"
+            android:layout_marginTop="5dp"
+            android:text="@string/label_navr"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editNavRPValue"
+            android:background="@drawable/rounded_corner_white"
+            android:inputType="numberDecimal"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/labelNavR"
+            android:layout_alignStart="@+id/editPosPValue"
+            android:text="@string/default_0_0"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/editNavRIValue"
+            android:background="@drawable/rounded_corner_white"
+            android:inputType="numberDecimal"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/editNavRPValue"
+            android:layout_alignTop="@+id/labelNavR"
+            android:layout_marginLeft="10dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/default_0_00"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/editNavRDValue"
+            android:background="@drawable/rounded_corner_white"
+            android:inputType="numberDecimal"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/editNavRIValue"
+            android:layout_alignTop="@+id/labelNavR"
+            android:layout_marginLeft="10dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/default_0_000"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp" />
+
+        <!-- LEVEL -->
+        <TextView
+            android:id="@+id/labelLevel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/labelNavR"
+            android:layout_alignStart="@+id/labelNavR"
+            android:layout_marginTop="5dp"
+            android:text="@string/label_level"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editLevelPValue"
+            android:background="@drawable/rounded_corner_white"
+            android:inputType="numberDecimal"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/labelLevel"
+            android:layout_alignStart="@+id/editNavRPValue"
+            android:text="@string/default_0_0"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/editLevelIValue"
+            android:background="@drawable/rounded_corner_white"
+            android:inputType="numberDecimal"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/editLevelPValue"
+            android:layout_alignTop="@+id/labelLevel"
+            android:layout_marginLeft="10dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/default_0_000"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/editLevelDValue"
+            android:background="@drawable/rounded_corner_white"
+            android:inputType="numberDecimal"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/editLevelIValue"
+            android:layout_alignTop="@+id/labelLevel"
+            android:layout_marginLeft="10dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/default_0_000"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp" />
+
+        <!-- MAG -->
+        <TextView
+            android:id="@+id/labelMag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/labelLevel"
+            android:layout_alignStart="@+id/labelLevel"
+            android:layout_marginTop="5dp"
+            android:text="@string/label_mag"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/editMagPValue"
+            android:background="@drawable/rounded_corner_white"
+            android:inputType="numberDecimal"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/labelMag"
+            android:layout_alignStart="@+id/editLevelPValue"
+            android:text="@string/default_0_0"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorBlack"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <!-- Throttle Configurations -->
+    <RelativeLayout
+        android:id="@+id/layoutThrottleControls"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layoutNavigationPIDControls"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="3dp">
+
+        <!-- Mid-point tunings -->
+        <RelativeLayout
+            android:id="@+id/layoutMidPointControls"
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/custom_border"
+            android:visibility="visible">
+
+            <!-- Throttle Mid -->
+            <TextView
+                android:id="@+id/labelRCThrottleMid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/label_rc_throttle_mid"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editRCThrottleMidValue"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/labelRCThrottleMid"
+                android:layout_marginLeft="20dp"
+                android:layout_toEndOf="@+id/labelRCThrottleMid"
+                android:background="@drawable/rounded_corner_white"
+                android:inputType="numberDecimal"
+                android:text="@string/default_0_00"
+                android:textAlignment="textEnd"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp" />
+
+            <!-- Throttle Expo -->
+            <TextView
+                android:id="@+id/labelRCThrottleExpo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/labelRCThrottleMid"
+                android:text="@string/label_rc_throttle_expo"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editRCThrottleExpoValue"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/labelRCThrottleExpo"
+                android:layout_alignLeft="@+id/editRCThrottleMidValue"
+                android:layout_toEndOf="@+id/labelRCThrottleExpo"
+                android:background="@drawable/rounded_corner_white"
+                android:inputType="numberDecimal"
+                android:text="@string/default_0_00"
+                android:textAlignment="textEnd"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp" />
+
+            <!-- Pitch Roll -->
+            <TextView
+                android:id="@+id/labelRCPitchRollRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/labelRCThrottleExpo"
+                android:layout_marginTop="5dp"
+                android:text="@string/label_rc_pitch_roll_rate"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editRCPitchRollRateValue"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/labelRCPitchRollRate"
+                android:layout_toEndOf="@+id/labelRCPitchRollRate"
+                android:layout_alignLeft="@+id/editRCThrottleExpoValue"
+                android:background="@drawable/rounded_corner_white"
+                android:inputType="numberDecimal"
+                android:text="@string/default_0_00"
+                android:textAlignment="textEnd"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/labelRCPitchRollExpo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/labelRCPitchRollRate"
+                android:text="@string/label_rc_pitch_roll_expo"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editRCPitchRollExpoValue"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/labelRCPitchRollExpo"
+                android:layout_alignLeft="@+id/editRCPitchRollRateValue"
+                android:layout_toEndOf="@+id/labelRCPitchRollExpo"
+                android:background="@drawable/rounded_corner_white"
+                android:inputType="numberDecimal"
+                android:text="@string/default_0_00"
+                android:textAlignment="textEnd"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
+
+        <!-- Throttle Attenuation Rate Controls -->
+        <RelativeLayout
+            android:id="@+id/layoutThrottleAttenuationRateControls"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/layoutMidPointControls"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/custom_border">
+
+            <!-- Roll and Pitch -->
+            <TextView
+                android:id="@+id/labelPitchRollRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/label_pitch_roll_rate"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editPitchRollRate"
+                android:background="@drawable/rounded_corner_white"
+                android:inputType="numberDecimal"
+                android:layout_marginStart="5dp"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/labelPitchRollRate"
+                android:layout_toEndOf="@+id/labelPitchRollRate"
+                android:text="@string/default_0_00"
+                android:textAlignment="textEnd"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp" />
+
+            <!-- Yaw Rate -->
+            <TextView
+                android:id="@+id/labelYawRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/label_yaw_rate"
+                android:textColor="@color/colorBlack"
+                android:layout_below="@+id/labelPitchRollRate"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editYawRate"
+                android:background="@drawable/rounded_corner_white"
+                android:inputType="numberDecimal"
+                android:layout_marginStart="5dp"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/labelYawRate"
+                android:layout_toEndOf="@+id/labelYawRate"
+                android:text="@string/default_0_0"
+                android:textAlignment="textEnd"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp" />
+
+            <!-- TPA -->
+            <TextView
+                android:id="@+id/labelTPARate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/labelYawRate"
+                android:text="@string/label_tpa_rate"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editTPARate"
+                android:background="@drawable/rounded_corner_white"
+                android:inputType="numberDecimal"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/labelTPARate"
+                android:layout_toEndOf="@+id/labelTPARate"
+                android:layout_alignLeft="@+id/editYawRate"
+                android:text="@string/default_0_0"
+                android:textAlignment="textEnd"
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp" />
+
+            <!-- DUMMY -->
+            <TextView
+                android:id="@+id/labelDummy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_below="@+id/labelTPARate"
+                android:text=""
+                android:textColor="@color/colorBlack"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <!-- Buttons for Applications -->
+    <RelativeLayout
+        android:id="@+id/layoutAppButtonControls"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/layoutThrottleControls"
+        android:visibility="visible"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginTop="3dp">
+
+        <Button
+            android:id="@+id/button_read_config"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/rounded_corner_button_type_1"
+            android:text="@string/label_button_read"
+            android:textColor="@color/colorWhite"
+            android:textStyle="normal" />
+
+        <Button
+            android:id="@+id/button_reset"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignTop="@+id/button_read_config"
+            android:layout_toEndOf="@+id/button_read_config"
+            android:layout_marginLeft="1dp"
+            android:background="@drawable/rounded_corner_button_type_2"
+            android:text="@string/label_button_reset"
+            android:textColor="@color/colorWhite"
+            android:textStyle="normal" />
+
+        <Button
+            android:id="@+id/button_calibrate_mag"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignTop="@+id/button_read_config"
+            android:layout_toEndOf="@+id/button_reset"
+            android:layout_marginLeft="1dp"
+            android:background="@drawable/rounded_corner_button_type_3"
+            android:text="@string/label_button_calib_mac"
+            android:textColor="@color/colorWhite"
+            android:textStyle="normal" />
+
+        <Button
+            android:id="@+id/button_calibrate_acc"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignTop="@+id/button_read_config"
+            android:layout_toEndOf="@+id/button_calibrate_mag"
+            android:layout_marginLeft="1dp"
+            android:background="@drawable/rounded_corner_button_type_3"
+            android:text="@string/label_button_calib_acc"
+            android:textColor="@color/colorWhite"
+            android:textStyle="normal" />
+
+        <Button
+            android:id="@+id/button_start_stop"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_below="@+id/button_read_config"
+            android:layout_alignLeft="@+id/button_read_config"
+            android:layout_marginLeft="1dp"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/rounded_corner_button_type_3"
+            android:text="@string/label_button_start"
+            android:textColor="@color/colorWhite"
+            android:textStyle="normal" />
+
+        <Button
+            android:id="@+id/button_write"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignTop="@+id/button_start_stop"
+            android:layout_alignLeft="@+id/button_reset"
+            android:layout_marginLeft="1dp"
+            android:background="@drawable/rounded_corner_button_type_3"
+            android:text="@string/label_button_write"
+            android:textColor="@color/colorWhite"
+            android:textStyle="normal" />
+
+
+        <Button
+            android:id="@+id/button_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignTop="@+id/button_start_stop"
+            android:layout_alignLeft="@+id/button_calibrate_mag"
+            android:layout_marginLeft="1dp"
+            android:background="@drawable/rounded_corner_button_type_3"
+            android:text="@string/label_button_settings"
+            android:textColor="@color/colorWhite"
+            android:textStyle="normal" />
+
+        <Button
+            android:id="@+id/button_exit"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignTop="@+id/button_start_stop"
+            android:layout_alignLeft="@+id/button_calibrate_acc"
+            android:layout_marginLeft="1dp"
+            android:background="@drawable/rounded_corner_button_type_3"
+            android:text="@string/label_button_exit"
+            android:textColor="@color/colorWhite"
+            android:textStyle="normal" />
+
+    </RelativeLayout>
+</RelativeLayout>

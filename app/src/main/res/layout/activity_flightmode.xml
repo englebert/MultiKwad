@@ -1,0 +1,2814 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".FlightModeActivity">
+
+    <TextView
+        android:id="@+id/labelApplicationTitle"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/labelProfileID"
+        android:background="@drawable/rounded_corner"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/labelApplicationTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:text="@string/label_profile_id"
+        android:textAlignment="textStart"
+        android:textColor="@color/colorWhite"
+        android:textSize="18sp" />
+
+    <HorizontalScrollView
+        android:id="@+id/layoutHorizontalView"
+        android:layout_width="wrap_content"
+        android:layout_height="460dp"
+        android:layout_below="@+id/labelProfileID">
+
+        <ScrollView
+            android:id="@+id/layoutScrollView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:fillViewport="true">
+
+            <RelativeLayout
+                android:id="@+id/layoutPrimaryPIDControls"
+                android:layout_width="500dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp">
+
+                <!-- AUX1 LOW -->
+                <TextView
+                    android:id="@+id/labelAux1Low"
+                    android:layout_width="32dp"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/checkbox_arm_aux1_low"
+                    android:layout_toEndOf="@+id/labelArm"
+                    android:text="@string/label_s_low"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- AUX1 MEDIUM -->
+                <TextView
+                    android:id="@+id/labelAux1Medium"
+                    android:layout_width="32dp"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/checkbox_arm_aux1_medium"
+                    android:layout_toEndOf="@+id/labelAux1Low"
+                    android:text="@string/label_s_medium"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- AUX1 HIGH -->
+                <TextView
+                    android:id="@+id/labelAux1High"
+                    android:layout_width="32dp"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/checkbox_arm_aux2_high"
+                    android:layout_toEndOf="@+id/labelAux1Medium"
+                    android:text="@string/label_s_high"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- AUX2 LOW -->
+                <TextView
+                    android:id="@+id/labelAux2Low"
+                    android:layout_width="32dp"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/checkbox_arm_aux2_low"
+                    android:layout_toEndOf="@+id/labelAux1High"
+                    android:text="@string/label_s_low"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- AUX2 MEDIUM -->
+                <TextView
+                    android:id="@+id/labelAux2Medium"
+                    android:layout_width="32dp"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/checkbox_arm_aux2_medium"
+                    android:layout_toEndOf="@+id/labelAux2Low"
+                    android:text="@string/label_s_medium"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- AUX2 HIGH -->
+                <TextView
+                    android:id="@+id/labelAux2High"
+                    android:layout_width="32dp"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/checkbox_arm_aux2_high"
+                    android:layout_toEndOf="@+id/labelAux2Medium"
+                    android:text="@string/label_s_high"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- AUX3 LOW -->
+                <TextView
+                    android:id="@+id/labelAux3Low"
+                    android:layout_width="32dp"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/checkbox_arm_aux3_low"
+                    android:layout_toEndOf="@+id/labelAux2High"
+                    android:text="@string/label_s_low"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- AUX3 MEDIUM -->
+                <TextView
+                    android:id="@+id/labelAux3Medium"
+                    android:layout_width="32dp"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/checkbox_arm_aux3_medium"
+                    android:layout_toEndOf="@+id/labelAux3Low"
+                    android:text="@string/label_s_medium"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- AUX3 HIGH -->
+                <TextView
+                    android:id="@+id/labelAux3High"
+                    android:layout_width="32dp"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/checkbox_arm_aux3_high"
+                    android:layout_toEndOf="@+id/labelAux3Medium"
+                    android:text="@string/label_s_high"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- AUX4 LOW -->
+                <TextView
+                    android:id="@+id/labelAux4Low"
+                    android:layout_width="32dp"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/checkbox_arm_aux4_low"
+                    android:layout_toEndOf="@+id/labelAux3High"
+                    android:text="@string/label_s_low"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- AUX4 MEDIUM -->
+                <TextView
+                    android:id="@+id/labelAux4Medium"
+                    android:layout_width="32dp"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/checkbox_arm_aux4_medium"
+                    android:layout_toEndOf="@+id/labelAux4Low"
+                    android:text="@string/label_s_medium"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- AUX4 HIGH -->
+                <TextView
+                    android:id="@+id/labelAux4High"
+                    android:layout_width="32dp"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/checkbox_arm_aux4_high"
+                    android:layout_toEndOf="@+id/labelAux4Medium"
+                    android:text="@string/label_s_high"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- AUX1 Label -->
+                <TextView
+                    android:id="@+id/labelAux1"
+                    android:background="@color/colorAuxLabelBackground"
+                    android:layout_width="96dp"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/labelAux1Low"
+                    android:layout_alignLeft="@+id/labelAux1Low"
+                    android:text="@string/label_s_aux1"
+                    android:layout_marginRight="1dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- AUX2 Label -->
+                <TextView
+                    android:id="@+id/labelAux2"
+                    android:background="@color/colorAuxLabelBackground"
+                    android:layout_width="96dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/labelAux2Low"
+                    android:layout_alignLeft="@+id/labelAux2Low"
+                    android:text="@string/label_s_aux2"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- AUX3 Label -->
+                <TextView
+                    android:id="@+id/labelAux3"
+                    android:background="@color/colorAuxLabelBackground"
+                    android:layout_width="96dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/labelAux3Low"
+                    android:layout_alignLeft="@+id/labelAux3Low"
+                    android:text="@string/label_s_aux3"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- AUX4 Label -->
+                <TextView
+                    android:id="@+id/labelAux4"
+                    android:background="@color/colorAuxLabelBackground"
+                    android:layout_width="96dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/labelAux4Low"
+                    android:layout_alignLeft="@+id/labelAux4Low"
+                    android:text="@string/label_s_aux4"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- ARM -->
+                <TextView
+                    android:id="@+id/labelArm"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="50dp"
+                    android:text="@string/label_s_arm"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- ANGLE -->
+                <TextView
+                    android:id="@+id/labelAngle"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/labelArm"
+                    android:text="@string/label_s_angle"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- HORIZON -->
+                <TextView
+                    android:id="@+id/labelHorizon"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/labelAngle"
+                    android:text="@string/label_s_horizon"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- BARO -->
+                <TextView
+                    android:id="@+id/labelBaro"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/labelHorizon"
+                    android:text="@string/label_s_baro"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- VARIO -->
+                <TextView
+                    android:id="@+id/labelVariometer"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/labelBaro"
+                    android:text="@string/label_s_vario"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- MAG -->
+                <TextView
+                    android:id="@+id/labelMag"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/labelVariometer"
+                    android:text="@string/label_s_mag"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- HEADFREE -->
+                <TextView
+                    android:id="@+id/labelHeadFree"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/labelMag"
+                    android:text="@string/label_s_headfree"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- HEADADJ -->
+                <TextView
+                    android:id="@+id/labelHeadAdj"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/labelHeadFree"
+                    android:text="@string/label_s_headadj"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- CAMSTAB -->
+                <TextView
+                    android:id="@+id/labelCamStab"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/labelHeadAdj"
+                    android:text="@string/label_s_camstab"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- CAMTRIG -->
+                <TextView
+                    android:id="@+id/labelCamTrig"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/labelCamStab"
+                    android:text="@string/label_s_camtrig"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- GPSHOME -->
+                <TextView
+                    android:id="@+id/labelGPSHome"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/labelCamTrig"
+                    android:text="@string/label_s_gpshome"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- GPSHOLD -->
+                <TextView
+                    android:id="@+id/labelGPSHold"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/labelGPSHome"
+                    android:text="@string/label_s_gpshold"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- PASSTHRU -->
+                <TextView
+                    android:id="@+id/labelPassThru"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/labelGPSHold"
+                    android:text="@string/label_s_passthru"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- BEEPER -->
+                <TextView
+                    android:id="@+id/labelBeeper"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/labelPassThru"
+                    android:text="@string/label_s_beeper"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- LEDMAX -->
+                <TextView
+                    android:id="@+id/labelLEDMax"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/labelBeeper"
+                    android:text="@string/label_s_ledmax"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- LEDLOW -->
+                <TextView
+                    android:id="@+id/labelLEDLow"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/labelLEDMax"
+                    android:text="@string/label_s_ledlow"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- LANDING LIGHTS -->
+                <TextView
+                    android:id="@+id/labelLandingLights"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/labelLEDLow"
+                    android:text="@string/label_s_landing_lights"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- INFLIGHT ACC CALIBRATION -->
+                <TextView
+                    android:id="@+id/labelCalib"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/labelLandingLights"
+                    android:text="@string/label_s_calib"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- GOVERNOR -->
+                <TextView
+                    android:id="@+id/labelGovernor"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/labelCalib"
+                    android:text="@string/label_s_governor"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- OSD SWITCH -->
+                <TextView
+                    android:id="@+id/labelOSDSwitch"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/labelGovernor"
+                    android:text="@string/label_s_osdsw"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- MISSION -->
+                <TextView
+                    android:id="@+id/labelMission"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/labelOSDSwitch"
+                    android:text="@string/label_s_mission"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- LAND -->
+                <TextView
+                    android:id="@+id/labelLand"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/labelMission"
+                    android:text="@string/label_s_land"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="18sp" />
+
+                <!-- Arm Checkbox - AUX1 -->
+                <CheckBox
+                    android:id="@+id/checkbox_arm_aux1_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelArm"
+                    android:layout_toEndOf="@+id/labelArm"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_arm_aux1_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelArm"
+                    android:layout_toEndOf="@+id/checkbox_arm_aux1_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_arm_aux1_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelArm"
+                    android:layout_toEndOf="@+id/checkbox_arm_aux1_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Arm Checkbox - AUX2 -->
+                <CheckBox
+                    android:id="@+id/checkbox_arm_aux2_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelArm"
+                    android:layout_toEndOf="@+id/checkbox_arm_aux1_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_arm_aux2_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelArm"
+                    android:layout_toEndOf="@+id/checkbox_arm_aux2_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_arm_aux2_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelArm"
+                    android:layout_toEndOf="@+id/checkbox_arm_aux2_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Arm Checkbox - AUX3 -->
+                <CheckBox
+                    android:id="@+id/checkbox_arm_aux3_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelArm"
+                    android:layout_toEndOf="@+id/checkbox_arm_aux2_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_arm_aux3_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelArm"
+                    android:layout_toEndOf="@+id/checkbox_arm_aux3_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_arm_aux3_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelArm"
+                    android:layout_marginTop="0dp"
+                    android:layout_toEndOf="@+id/checkbox_arm_aux3_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Arm Checkbox - AUX4 -->
+                <CheckBox
+                    android:id="@+id/checkbox_arm_aux4_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelArm"
+                    android:layout_toEndOf="@+id/checkbox_arm_aux3_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_arm_aux4_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelArm"
+                    android:layout_toEndOf="@+id/checkbox_arm_aux4_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_arm_aux4_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelArm"
+                    android:layout_marginTop="0dp"
+                    android:layout_toEndOf="@+id/checkbox_arm_aux4_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Angle Checkbox - AUX1 -->
+                <CheckBox
+                    android:id="@+id/checkbox_angle_aux1_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelAngle"
+                    android:layout_toEndOf="@+id/labelArm"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_angle_aux1_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelAngle"
+                    android:layout_toEndOf="@+id/checkbox_angle_aux1_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_angle_aux1_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelAngle"
+                    android:layout_toEndOf="@+id/checkbox_angle_aux1_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Angle Checkbox - AUX2 -->
+                <CheckBox
+                    android:id="@+id/checkbox_angle_aux2_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelAngle"
+                    android:layout_toEndOf="@+id/checkbox_angle_aux1_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_angle_aux2_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelAngle"
+                    android:layout_toEndOf="@+id/checkbox_angle_aux2_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_angle_aux2_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelAngle"
+                    android:layout_toEndOf="@+id/checkbox_angle_aux2_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Angle Checkbox - AUX3 -->
+                <CheckBox
+                    android:id="@+id/checkbox_angle_aux3_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelAngle"
+                    android:layout_toEndOf="@+id/checkbox_angle_aux2_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_angle_aux3_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelAngle"
+                    android:layout_toEndOf="@+id/checkbox_angle_aux3_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_angle_aux3_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelAngle"
+                    android:layout_toEndOf="@+id/checkbox_angle_aux3_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Angle Checkbox - AUX4 -->
+                <CheckBox
+                    android:id="@+id/checkbox_angle_aux4_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelAngle"
+                    android:layout_toEndOf="@+id/checkbox_angle_aux3_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_angle_aux4_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelAngle"
+                    android:layout_toEndOf="@+id/checkbox_angle_aux4_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_angle_aux4_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelAngle"
+                    android:layout_toEndOf="@+id/checkbox_angle_aux4_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Horizon Checkbox - AUX1 -->
+                <CheckBox
+                    android:id="@+id/checkbox_horizon_aux1_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelHorizon"
+                    android:layout_toEndOf="@+id/labelHorizon"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_horizon_aux1_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelHorizon"
+                    android:layout_toEndOf="@+id/checkbox_horizon_aux1_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_horizon_aux1_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelHorizon"
+                    android:layout_toEndOf="@+id/checkbox_horizon_aux1_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Horizon Checkbox - AUX2 -->
+                <CheckBox
+                    android:id="@+id/checkbox_horizon_aux2_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelHorizon"
+                    android:layout_toEndOf="@+id/checkbox_horizon_aux1_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_horizon_aux2_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelHorizon"
+                    android:layout_toEndOf="@+id/checkbox_horizon_aux2_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_horizon_aux2_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelHorizon"
+                    android:layout_toEndOf="@+id/checkbox_horizon_aux2_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Horizon Checkbox - AUX3 -->
+                <CheckBox
+                    android:id="@+id/checkbox_horizon_aux3_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelHorizon"
+                    android:layout_toEndOf="@+id/checkbox_horizon_aux2_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_horizon_aux3_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelHorizon"
+                    android:layout_toEndOf="@+id/checkbox_horizon_aux3_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_horizon_aux3_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelHorizon"
+                    android:layout_toEndOf="@+id/checkbox_horizon_aux3_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Horizon Checkbox - AUX4 -->
+                <CheckBox
+                    android:id="@+id/checkbox_horizon_aux4_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelHorizon"
+                    android:layout_toEndOf="@+id/checkbox_horizon_aux3_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_horizon_aux4_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelHorizon"
+                    android:layout_toEndOf="@+id/checkbox_horizon_aux4_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_horizon_aux4_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelHorizon"
+                    android:layout_toEndOf="@+id/checkbox_horizon_aux4_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Baro Checkbox - AUX1 -->
+                <CheckBox
+                    android:id="@+id/checkbox_baro_aux1_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelBaro"
+                    android:layout_toEndOf="@+id/labelBaro"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_baro_aux1_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelBaro"
+                    android:layout_toEndOf="@+id/checkbox_baro_aux1_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_baro_aux1_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelBaro"
+                    android:layout_toEndOf="@+id/checkbox_baro_aux1_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Baro Checkbox - AUX2 -->
+                <CheckBox
+                    android:id="@+id/checkbox_baro_aux2_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelBaro"
+                    android:layout_toEndOf="@+id/checkbox_baro_aux1_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_baro_aux2_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelBaro"
+                    android:layout_toEndOf="@+id/checkbox_baro_aux2_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_baro_aux2_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelBaro"
+                    android:layout_toEndOf="@+id/checkbox_baro_aux2_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Baro Checkbox - AUX3 -->
+                <CheckBox
+                    android:id="@+id/checkbox_baro_aux3_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelBaro"
+                    android:layout_toEndOf="@+id/checkbox_baro_aux2_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_baro_aux3_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelBaro"
+                    android:layout_toEndOf="@+id/checkbox_baro_aux3_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_baro_aux3_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelBaro"
+                    android:layout_toEndOf="@+id/checkbox_baro_aux3_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Baro Checkbox - AUX4 -->
+                <CheckBox
+                    android:id="@+id/checkbox_baro_aux4_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelBaro"
+                    android:layout_toEndOf="@+id/checkbox_baro_aux3_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_baro_aux4_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelBaro"
+                    android:layout_toEndOf="@+id/checkbox_baro_aux4_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_baro_aux4_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelBaro"
+                    android:layout_toEndOf="@+id/checkbox_baro_aux4_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Vario Checkbox - AUX1 -->
+                <CheckBox
+                    android:id="@+id/checkbox_vario_aux1_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelVariometer"
+                    android:layout_toEndOf="@+id/labelVariometer"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_vario_aux1_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelVariometer"
+                    android:layout_toEndOf="@+id/checkbox_vario_aux1_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_vario_aux1_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelVariometer"
+                    android:layout_toEndOf="@+id/checkbox_vario_aux1_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Vario Checkbox - AUX2 -->
+                <CheckBox
+                    android:id="@+id/checkbox_vario_aux2_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelVariometer"
+                    android:layout_toEndOf="@+id/checkbox_vario_aux1_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_vario_aux2_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelVariometer"
+                    android:layout_toEndOf="@+id/checkbox_vario_aux2_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_vario_aux2_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelVariometer"
+                    android:layout_toEndOf="@+id/checkbox_vario_aux2_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Vario Checkbox - AUX3 -->
+                <CheckBox
+                    android:id="@+id/checkbox_vario_aux3_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelVariometer"
+                    android:layout_toEndOf="@+id/checkbox_vario_aux2_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_vario_aux3_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelVariometer"
+                    android:layout_toEndOf="@+id/checkbox_vario_aux3_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_vario_aux3_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelVariometer"
+                    android:layout_toEndOf="@+id/checkbox_vario_aux3_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Vario Checkbox - AUX4 -->
+                <CheckBox
+                    android:id="@+id/checkbox_vario_aux4_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelVariometer"
+                    android:layout_toEndOf="@+id/checkbox_vario_aux3_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_vario_aux4_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelVariometer"
+                    android:layout_toEndOf="@+id/checkbox_vario_aux4_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_vario_aux4_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelVariometer"
+                    android:layout_toEndOf="@+id/checkbox_vario_aux4_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Mag Checkbox - AUX1 -->
+                <CheckBox
+                    android:id="@+id/checkbox_mag_aux1_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelMag"
+                    android:layout_toEndOf="@+id/labelMag"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_mag_aux1_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelMag"
+                    android:layout_toEndOf="@+id/checkbox_mag_aux1_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_mag_aux1_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelMag"
+                    android:layout_toEndOf="@+id/checkbox_mag_aux1_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Mag Checkbox - AUX2 -->
+                <CheckBox
+                    android:id="@+id/checkbox_mag_aux2_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelMag"
+                    android:layout_toEndOf="@+id/checkbox_mag_aux1_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_mag_aux2_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelMag"
+                    android:layout_toEndOf="@+id/checkbox_mag_aux2_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_mag_aux2_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelMag"
+                    android:layout_toEndOf="@+id/checkbox_mag_aux2_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Mag Checkbox - AUX3 -->
+                <CheckBox
+                    android:id="@+id/checkbox_mag_aux3_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelMag"
+                    android:layout_toEndOf="@+id/checkbox_mag_aux2_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_mag_aux3_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelMag"
+                    android:layout_toEndOf="@+id/checkbox_mag_aux3_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_mag_aux3_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelMag"
+                    android:layout_toEndOf="@+id/checkbox_mag_aux3_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Mag Checkbox - AUX4 -->
+                <CheckBox
+                    android:id="@+id/checkbox_mag_aux4_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelMag"
+                    android:layout_toEndOf="@+id/checkbox_mag_aux3_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_mag_aux4_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelMag"
+                    android:layout_toEndOf="@+id/checkbox_mag_aux4_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_mag_aux4_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelMag"
+                    android:layout_toEndOf="@+id/checkbox_mag_aux4_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- HeadFree Checkbox - AUX1 -->
+                <CheckBox
+                    android:id="@+id/checkbox_headfree_aux1_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelHeadFree"
+                    android:layout_toEndOf="@+id/labelHeadFree"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_headfree_aux1_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelHeadFree"
+                    android:layout_toEndOf="@+id/checkbox_headfree_aux1_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_headfree_aux1_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelHeadFree"
+                    android:layout_toEndOf="@+id/checkbox_headfree_aux1_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- HeadFree Checkbox - AUX2 -->
+                <CheckBox
+                    android:id="@+id/checkbox_headfree_aux2_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelHeadFree"
+                    android:layout_toEndOf="@+id/checkbox_headfree_aux1_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_headfree_aux2_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelHeadFree"
+                    android:layout_toEndOf="@+id/checkbox_headfree_aux2_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_headfree_aux2_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelHeadFree"
+                    android:layout_toEndOf="@+id/checkbox_headfree_aux2_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- HeadFree Checkbox - AUX3 -->
+                <CheckBox
+                    android:id="@+id/checkbox_headfree_aux3_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelHeadFree"
+                    android:layout_toEndOf="@+id/checkbox_headfree_aux2_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_headfree_aux3_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelHeadFree"
+                    android:layout_toEndOf="@+id/checkbox_headfree_aux3_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_headfree_aux3_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelHeadFree"
+                    android:layout_toEndOf="@+id/checkbox_headfree_aux3_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- HeadFree Checkbox - AUX4 -->
+                <CheckBox
+                    android:id="@+id/checkbox_headfree_aux4_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelHeadFree"
+                    android:layout_toEndOf="@+id/checkbox_headfree_aux3_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_headfree_aux4_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelHeadFree"
+                    android:layout_toEndOf="@+id/checkbox_headfree_aux4_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_headfree_aux4_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelHeadFree"
+                    android:layout_toEndOf="@+id/checkbox_headfree_aux4_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- HeadAdj Checkbox - AUX1 -->
+                <CheckBox
+                    android:id="@+id/checkbox_headadj_aux1_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelHeadAdj"
+                    android:layout_toEndOf="@+id/labelHeadAdj"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_headadj_aux1_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelHeadAdj"
+                    android:layout_toEndOf="@+id/checkbox_headadj_aux1_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_headadj_aux1_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelHeadAdj"
+                    android:layout_toEndOf="@+id/checkbox_headadj_aux1_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- HeadAdj Checkbox - AUX2 -->
+                <CheckBox
+                    android:id="@+id/checkbox_headadj_aux2_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelHeadAdj"
+                    android:layout_toEndOf="@+id/checkbox_headadj_aux1_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_headadj_aux2_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelHeadAdj"
+                    android:layout_toEndOf="@+id/checkbox_headadj_aux2_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_headadj_aux2_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelHeadAdj"
+                    android:layout_toEndOf="@+id/checkbox_headadj_aux2_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- HeadAdj Checkbox - AUX3 -->
+                <CheckBox
+                    android:id="@+id/checkbox_headadj_aux3_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelHeadAdj"
+                    android:layout_toEndOf="@+id/checkbox_headadj_aux2_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_headadj_aux3_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelHeadAdj"
+                    android:layout_toEndOf="@+id/checkbox_headadj_aux3_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_headadj_aux3_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelHeadAdj"
+                    android:layout_toEndOf="@+id/checkbox_headadj_aux3_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- HeadAdj Checkbox - AUX4 -->
+                <CheckBox
+                    android:id="@+id/checkbox_headadj_aux4_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelHeadAdj"
+                    android:layout_toEndOf="@+id/checkbox_headadj_aux3_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_headadj_aux4_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelHeadAdj"
+                    android:layout_toEndOf="@+id/checkbox_headadj_aux4_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_headadj_aux4_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelHeadAdj"
+                    android:layout_toEndOf="@+id/checkbox_headadj_aux4_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- CamStab Checkbox - AUX1 -->
+                <CheckBox
+                    android:id="@+id/checkbox_camstab_aux1_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelCamStab"
+                    android:layout_toEndOf="@+id/labelCamStab"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_camstab_aux1_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelCamStab"
+                    android:layout_toEndOf="@+id/checkbox_camstab_aux1_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_camstab_aux1_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelCamStab"
+                    android:layout_toEndOf="@+id/checkbox_camstab_aux1_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- CamStab Checkbox - AUX2 -->
+                <CheckBox
+                    android:id="@+id/checkbox_camstab_aux2_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelCamStab"
+                    android:layout_toEndOf="@+id/checkbox_camstab_aux1_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_camstab_aux2_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelCamStab"
+                    android:layout_toEndOf="@+id/checkbox_camstab_aux2_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_camstab_aux2_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelCamStab"
+                    android:layout_toEndOf="@+id/checkbox_camstab_aux2_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- CamStab Checkbox - AUX3 -->
+                <CheckBox
+                    android:id="@+id/checkbox_camstab_aux3_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelCamStab"
+                    android:layout_toEndOf="@+id/checkbox_camstab_aux2_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_camstab_aux3_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelCamStab"
+                    android:layout_toEndOf="@+id/checkbox_camstab_aux3_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_camstab_aux3_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelCamStab"
+                    android:layout_toEndOf="@+id/checkbox_camstab_aux3_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- CamStab Checkbox - AUX4 -->
+                <CheckBox
+                    android:id="@+id/checkbox_camstab_aux4_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelCamStab"
+                    android:layout_toEndOf="@+id/checkbox_camstab_aux3_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_camstab_aux4_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelCamStab"
+                    android:layout_toEndOf="@+id/checkbox_camstab_aux4_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_camstab_aux4_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelCamStab"
+                    android:layout_toEndOf="@+id/checkbox_camstab_aux4_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- CamTrig Checkbox - AUX1 -->
+                <CheckBox
+                    android:id="@+id/checkbox_camtrig_aux1_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelCamTrig"
+                    android:layout_toEndOf="@+id/labelCamTrig"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_camtrig_aux1_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelCamTrig"
+                    android:layout_toEndOf="@+id/checkbox_camtrig_aux1_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_camtrig_aux1_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelCamTrig"
+                    android:layout_toEndOf="@+id/checkbox_camtrig_aux1_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- CamTrig Checkbox - AUX2 -->
+                <CheckBox
+                    android:id="@+id/checkbox_camtrig_aux2_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelCamTrig"
+                    android:layout_toEndOf="@+id/checkbox_camtrig_aux1_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_camtrig_aux2_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelCamTrig"
+                    android:layout_toEndOf="@+id/checkbox_camtrig_aux2_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_camtrig_aux2_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelCamTrig"
+                    android:layout_toEndOf="@+id/checkbox_camtrig_aux2_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- CamTrig Checkbox - AUX3 -->
+                <CheckBox
+                    android:id="@+id/checkbox_camtrig_aux3_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelCamTrig"
+                    android:layout_toEndOf="@+id/checkbox_camtrig_aux2_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_camtrig_aux3_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelCamTrig"
+                    android:layout_toEndOf="@+id/checkbox_camtrig_aux3_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_camtrig_aux3_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelCamTrig"
+                    android:layout_toEndOf="@+id/checkbox_camtrig_aux3_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- CamTrig Checkbox - AUX4 -->
+                <CheckBox
+                    android:id="@+id/checkbox_camtrig_aux4_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelCamTrig"
+                    android:layout_toEndOf="@+id/checkbox_camtrig_aux3_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_camtrig_aux4_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelCamTrig"
+                    android:layout_toEndOf="@+id/checkbox_camtrig_aux4_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_camtrig_aux4_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelCamTrig"
+                    android:layout_toEndOf="@+id/checkbox_camtrig_aux4_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- GPSHome Checkbox - AUX1 -->
+                <CheckBox
+                    android:id="@+id/checkbox_gpshome_aux1_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelGPSHome"
+                    android:layout_toEndOf="@+id/labelGPSHome"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_gpshome_aux1_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelGPSHome"
+                    android:layout_toEndOf="@+id/checkbox_gpshome_aux1_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_gpshome_aux1_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelGPSHome"
+                    android:layout_toEndOf="@+id/checkbox_gpshome_aux1_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- GPSHome Checkbox - AUX2 -->
+                <CheckBox
+                    android:id="@+id/checkbox_gpshome_aux2_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelGPSHome"
+                    android:layout_toEndOf="@+id/checkbox_gpshome_aux1_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_gpshome_aux2_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelGPSHome"
+                    android:layout_toEndOf="@+id/checkbox_gpshome_aux2_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_gpshome_aux2_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelGPSHome"
+                    android:layout_toEndOf="@+id/checkbox_gpshome_aux2_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- GPSHome Checkbox - AUX3 -->
+                <CheckBox
+                    android:id="@+id/checkbox_gpshome_aux3_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelGPSHome"
+                    android:layout_toEndOf="@+id/checkbox_gpshome_aux2_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_gpshome_aux3_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelGPSHome"
+                    android:layout_toEndOf="@+id/checkbox_gpshome_aux3_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_gpshome_aux3_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelGPSHome"
+                    android:layout_toEndOf="@+id/checkbox_gpshome_aux3_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- GPSHome Checkbox - AUX4 -->
+                <CheckBox
+                    android:id="@+id/checkbox_gpshome_aux4_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelGPSHome"
+                    android:layout_toEndOf="@+id/checkbox_gpshome_aux3_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_gpshome_aux4_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelGPSHome"
+                    android:layout_toEndOf="@+id/checkbox_gpshome_aux4_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_gpshome_aux4_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelGPSHome"
+                    android:layout_toEndOf="@+id/checkbox_gpshome_aux4_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- GPSHold Checkbox - AUX1 -->
+                <CheckBox
+                    android:id="@+id/checkbox_gpshold_aux1_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelGPSHold"
+                    android:layout_toEndOf="@+id/labelGPSHold"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_gpshold_aux1_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelGPSHold"
+                    android:layout_toEndOf="@+id/checkbox_gpshold_aux1_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_gpshold_aux1_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelGPSHold"
+                    android:layout_toEndOf="@+id/checkbox_gpshold_aux1_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- GPSHold Checkbox - AUX2 -->
+                <CheckBox
+                    android:id="@+id/checkbox_gpshold_aux2_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelGPSHold"
+                    android:layout_toEndOf="@+id/checkbox_gpshold_aux1_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_gpshold_aux2_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelGPSHold"
+                    android:layout_toEndOf="@+id/checkbox_gpshold_aux2_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_gpshold_aux2_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelGPSHold"
+                    android:layout_toEndOf="@+id/checkbox_gpshold_aux2_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- GPSHold Checkbox - AUX3 -->
+                <CheckBox
+                    android:id="@+id/checkbox_gpshold_aux3_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelGPSHold"
+                    android:layout_toEndOf="@+id/checkbox_gpshold_aux2_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_gpshold_aux3_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelGPSHold"
+                    android:layout_toEndOf="@+id/checkbox_gpshold_aux3_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_gpshold_aux3_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelGPSHold"
+                    android:layout_toEndOf="@+id/checkbox_gpshold_aux3_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- GPSHold Checkbox - AUX4 -->
+                <CheckBox
+                    android:id="@+id/checkbox_gpshold_aux4_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelGPSHold"
+                    android:layout_toEndOf="@+id/checkbox_gpshold_aux3_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_gpshold_aux4_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelGPSHold"
+                    android:layout_toEndOf="@+id/checkbox_gpshold_aux4_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_gpshold_aux4_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelGPSHold"
+                    android:layout_toEndOf="@+id/checkbox_gpshold_aux4_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- PassThru Checkbox - AUX1 -->
+                <CheckBox
+                    android:id="@+id/checkbox_passthru_aux1_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelPassThru"
+                    android:layout_toEndOf="@+id/labelPassThru"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_passthru_aux1_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelPassThru"
+                    android:layout_toEndOf="@+id/checkbox_passthru_aux1_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_passthru_aux1_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelPassThru"
+                    android:layout_toEndOf="@+id/checkbox_passthru_aux1_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- PassThru Checkbox - AUX2 -->
+                <CheckBox
+                    android:id="@+id/checkbox_passthru_aux2_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelPassThru"
+                    android:layout_toEndOf="@+id/checkbox_passthru_aux1_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_passthru_aux2_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelPassThru"
+                    android:layout_toEndOf="@+id/checkbox_passthru_aux2_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_passthru_aux2_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelPassThru"
+                    android:layout_toEndOf="@+id/checkbox_passthru_aux2_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- PassThru Checkbox - AUX3 -->
+                <CheckBox
+                    android:id="@+id/checkbox_passthru_aux3_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelPassThru"
+                    android:layout_toEndOf="@+id/checkbox_passthru_aux2_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_passthru_aux3_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelPassThru"
+                    android:layout_toEndOf="@+id/checkbox_passthru_aux3_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_passthru_aux3_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelPassThru"
+                    android:layout_toEndOf="@+id/checkbox_passthru_aux3_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- PassThru Checkbox - AUX4 -->
+                <CheckBox
+                    android:id="@+id/checkbox_passthru_aux4_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelPassThru"
+                    android:layout_toEndOf="@+id/checkbox_passthru_aux3_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_passthru_aux4_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelPassThru"
+                    android:layout_toEndOf="@+id/checkbox_passthru_aux4_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_passthru_aux4_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelPassThru"
+                    android:layout_toEndOf="@+id/checkbox_passthru_aux4_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Beeper Checkbox - AUX1 -->
+                <CheckBox
+                    android:id="@+id/checkbox_beeper_aux1_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelBeeper"
+                    android:layout_toEndOf="@+id/labelBeeper"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_beeper_aux1_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelBeeper"
+                    android:layout_toEndOf="@+id/checkbox_beeper_aux1_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_beeper_aux1_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelBeeper"
+                    android:layout_toEndOf="@+id/checkbox_beeper_aux1_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Beeper Checkbox - AUX2 -->
+                <CheckBox
+                    android:id="@+id/checkbox_beeper_aux2_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelBeeper"
+                    android:layout_toEndOf="@+id/checkbox_beeper_aux1_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_beeper_aux2_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelBeeper"
+                    android:layout_toEndOf="@+id/checkbox_beeper_aux2_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_beeper_aux2_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelBeeper"
+                    android:layout_toEndOf="@+id/checkbox_beeper_aux2_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Beeper Checkbox - AUX3 -->
+                <CheckBox
+                    android:id="@+id/checkbox_beeper_aux3_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelBeeper"
+                    android:layout_toEndOf="@+id/checkbox_beeper_aux2_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_beeper_aux3_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelBeeper"
+                    android:layout_toEndOf="@+id/checkbox_beeper_aux3_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_beeper_aux3_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelBeeper"
+                    android:layout_toEndOf="@+id/checkbox_beeper_aux3_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Beeper Checkbox - AUX4 -->
+                <CheckBox
+                    android:id="@+id/checkbox_beeper_aux4_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelBeeper"
+                    android:layout_toEndOf="@+id/checkbox_beeper_aux3_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_beeper_aux4_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelBeeper"
+                    android:layout_toEndOf="@+id/checkbox_beeper_aux4_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_beeper_aux4_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelBeeper"
+                    android:layout_toEndOf="@+id/checkbox_beeper_aux4_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- LEDMax Checkbox - AUX1 -->
+                <CheckBox
+                    android:id="@+id/checkbox_ledmax_aux1_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLEDMax"
+                    android:layout_toEndOf="@+id/labelLEDMax"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_ledmax_aux1_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLEDMax"
+                    android:layout_toEndOf="@+id/checkbox_ledmax_aux1_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_ledmax_aux1_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLEDMax"
+                    android:layout_toEndOf="@+id/checkbox_ledmax_aux1_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- LEDMax Checkbox - AUX2 -->
+                <CheckBox
+                    android:id="@+id/checkbox_ledmax_aux2_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLEDMax"
+                    android:layout_toEndOf="@+id/checkbox_ledmax_aux1_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_ledmax_aux2_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLEDMax"
+                    android:layout_toEndOf="@+id/checkbox_ledmax_aux2_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_ledmax_aux2_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLEDMax"
+                    android:layout_toEndOf="@+id/checkbox_ledmax_aux2_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- LEDMax Checkbox - AUX3 -->
+                <CheckBox
+                    android:id="@+id/checkbox_ledmax_aux3_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLEDMax"
+                    android:layout_toEndOf="@+id/checkbox_ledmax_aux2_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_ledmax_aux3_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLEDMax"
+                    android:layout_toEndOf="@+id/checkbox_ledmax_aux3_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_ledmax_aux3_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLEDMax"
+                    android:layout_toEndOf="@+id/checkbox_ledmax_aux3_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- LEDMax Checkbox - AUX4 -->
+                <CheckBox
+                    android:id="@+id/checkbox_ledmax_aux4_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLEDMax"
+                    android:layout_toEndOf="@+id/checkbox_ledmax_aux3_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_ledmax_aux4_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLEDMax"
+                    android:layout_toEndOf="@+id/checkbox_ledmax_aux4_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_ledmax_aux4_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLEDMax"
+                    android:layout_toEndOf="@+id/checkbox_ledmax_aux4_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- LEDLow Checkbox - AUX1 -->
+                <CheckBox
+                    android:id="@+id/checkbox_ledlow_aux1_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLEDLow"
+                    android:layout_toEndOf="@+id/labelLEDLow"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_ledlow_aux1_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLEDLow"
+                    android:layout_toEndOf="@+id/checkbox_ledlow_aux1_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_ledlow_aux1_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLEDLow"
+                    android:layout_toEndOf="@+id/checkbox_ledlow_aux1_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- LEDLow Checkbox - AUX2 -->
+                <CheckBox
+                    android:id="@+id/checkbox_ledlow_aux2_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLEDLow"
+                    android:layout_toEndOf="@+id/checkbox_ledlow_aux1_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_ledlow_aux2_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLEDLow"
+                    android:layout_toEndOf="@+id/checkbox_ledlow_aux2_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_ledlow_aux2_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLEDLow"
+                    android:layout_toEndOf="@+id/checkbox_ledlow_aux2_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- LEDLow Checkbox - AUX3 -->
+                <CheckBox
+                    android:id="@+id/checkbox_ledlow_aux3_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLEDLow"
+                    android:layout_toEndOf="@+id/checkbox_ledlow_aux2_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_ledlow_aux3_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLEDLow"
+                    android:layout_toEndOf="@+id/checkbox_ledlow_aux3_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_ledlow_aux3_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLEDLow"
+                    android:layout_toEndOf="@+id/checkbox_ledlow_aux3_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- LEDLow Checkbox - AUX4 -->
+                <CheckBox
+                    android:id="@+id/checkbox_ledlow_aux4_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLEDLow"
+                    android:layout_toEndOf="@+id/checkbox_ledlow_aux3_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_ledlow_aux4_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLEDLow"
+                    android:layout_toEndOf="@+id/checkbox_ledlow_aux4_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_ledlow_aux4_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLEDLow"
+                    android:layout_toEndOf="@+id/checkbox_ledlow_aux4_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- LandingLights Checkbox - AUX1 -->
+                <CheckBox
+                    android:id="@+id/checkbox_landing_lights_aux1_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLandingLights"
+                    android:layout_toEndOf="@+id/labelLandingLights"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_landing_lights_aux1_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLandingLights"
+                    android:layout_toEndOf="@+id/checkbox_landing_lights_aux1_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_landing_lights_aux1_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLandingLights"
+                    android:layout_toEndOf="@+id/checkbox_landing_lights_aux1_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- LandingLights Checkbox - AUX2 -->
+                <CheckBox
+                    android:id="@+id/checkbox_landing_lights_aux2_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLandingLights"
+                    android:layout_toEndOf="@+id/checkbox_landing_lights_aux1_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_landing_lights_aux2_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLandingLights"
+                    android:layout_toEndOf="@+id/checkbox_landing_lights_aux2_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_landing_lights_aux2_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLandingLights"
+                    android:layout_toEndOf="@+id/checkbox_landing_lights_aux2_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- LandingLights Checkbox - AUX3 -->
+                <CheckBox
+                    android:id="@+id/checkbox_landing_lights_aux3_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLandingLights"
+                    android:layout_toEndOf="@+id/checkbox_landing_lights_aux2_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_landing_lights_aux3_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLandingLights"
+                    android:layout_toEndOf="@+id/checkbox_landing_lights_aux3_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_landing_lights_aux3_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLandingLights"
+                    android:layout_toEndOf="@+id/checkbox_landing_lights_aux3_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- LandingLights Checkbox - AUX4 -->
+                <CheckBox
+                    android:id="@+id/checkbox_landing_lights_aux4_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLandingLights"
+                    android:layout_toEndOf="@+id/checkbox_landing_lights_aux3_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_landing_lights_aux4_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLandingLights"
+                    android:layout_toEndOf="@+id/checkbox_landing_lights_aux4_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_landing_lights_aux4_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLandingLights"
+                    android:layout_toEndOf="@+id/checkbox_landing_lights_aux4_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Calib Checkbox - AUX1 -->
+                <CheckBox
+                    android:id="@+id/checkbox_calib_aux1_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelCalib"
+                    android:layout_toEndOf="@+id/labelCalib"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_calib_aux1_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelCalib"
+                    android:layout_toEndOf="@+id/checkbox_calib_aux1_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_calib_aux1_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelCalib"
+                    android:layout_toEndOf="@+id/checkbox_calib_aux1_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Calib Checkbox - AUX2 -->
+                <CheckBox
+                    android:id="@+id/checkbox_calib_aux2_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelCalib"
+                    android:layout_toEndOf="@+id/checkbox_calib_aux1_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_calib_aux2_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelCalib"
+                    android:layout_toEndOf="@+id/checkbox_calib_aux2_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_calib_aux2_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelCalib"
+                    android:layout_toEndOf="@+id/checkbox_calib_aux2_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Calib Checkbox - AUX3 -->
+                <CheckBox
+                    android:id="@+id/checkbox_calib_aux3_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelCalib"
+                    android:layout_toEndOf="@+id/checkbox_calib_aux2_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_calib_aux3_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelCalib"
+                    android:layout_toEndOf="@+id/checkbox_calib_aux3_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_calib_aux3_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelCalib"
+                    android:layout_toEndOf="@+id/checkbox_calib_aux3_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Calib Checkbox - AUX4 -->
+                <CheckBox
+                    android:id="@+id/checkbox_calib_aux4_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelCalib"
+                    android:layout_toEndOf="@+id/checkbox_calib_aux3_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_calib_aux4_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelCalib"
+                    android:layout_toEndOf="@+id/checkbox_calib_aux4_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_calib_aux4_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelCalib"
+                    android:layout_toEndOf="@+id/checkbox_calib_aux4_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Governor Checkbox - AUX1 -->
+                <CheckBox
+                    android:id="@+id/checkbox_governor_aux1_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelGovernor"
+                    android:layout_toEndOf="@+id/labelGovernor"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_governor_aux1_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelGovernor"
+                    android:layout_toEndOf="@+id/checkbox_governor_aux1_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_governor_aux1_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelGovernor"
+                    android:layout_toEndOf="@+id/checkbox_governor_aux1_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Governor Checkbox - AUX2 -->
+                <CheckBox
+                    android:id="@+id/checkbox_governor_aux2_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelGovernor"
+                    android:layout_toEndOf="@+id/checkbox_governor_aux1_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_governor_aux2_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelGovernor"
+                    android:layout_toEndOf="@+id/checkbox_governor_aux2_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_governor_aux2_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelGovernor"
+                    android:layout_toEndOf="@+id/checkbox_governor_aux2_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Governor Checkbox - AUX3 -->
+                <CheckBox
+                    android:id="@+id/checkbox_governor_aux3_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelGovernor"
+                    android:layout_toEndOf="@+id/checkbox_governor_aux2_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_governor_aux3_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelGovernor"
+                    android:layout_toEndOf="@+id/checkbox_governor_aux3_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_governor_aux3_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelGovernor"
+                    android:layout_toEndOf="@+id/checkbox_governor_aux3_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Governor Checkbox - AUX4 -->
+                <CheckBox
+                    android:id="@+id/checkbox_governor_aux4_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelGovernor"
+                    android:layout_toEndOf="@+id/checkbox_governor_aux3_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_governor_aux4_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelGovernor"
+                    android:layout_toEndOf="@+id/checkbox_governor_aux4_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_governor_aux4_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelGovernor"
+                    android:layout_toEndOf="@+id/checkbox_governor_aux4_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- OSDSwitch Checkbox - AUX1 -->
+                <CheckBox
+                    android:id="@+id/checkbox_osdsw_aux1_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelOSDSwitch"
+                    android:layout_toEndOf="@+id/labelOSDSwitch"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_osdsw_aux1_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelOSDSwitch"
+                    android:layout_toEndOf="@+id/checkbox_osdsw_aux1_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_osdsw_aux1_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelOSDSwitch"
+                    android:layout_toEndOf="@+id/checkbox_osdsw_aux1_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- OSDSwitch Checkbox - AUX2 -->
+                <CheckBox
+                    android:id="@+id/checkbox_osdsw_aux2_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelOSDSwitch"
+                    android:layout_toEndOf="@+id/checkbox_osdsw_aux1_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_osdsw_aux2_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelOSDSwitch"
+                    android:layout_toEndOf="@+id/checkbox_osdsw_aux2_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_osdsw_aux2_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelOSDSwitch"
+                    android:layout_toEndOf="@+id/checkbox_osdsw_aux2_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- OSDSwitch Checkbox - AUX3 -->
+                <CheckBox
+                    android:id="@+id/checkbox_osdsw_aux3_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelOSDSwitch"
+                    android:layout_toEndOf="@+id/checkbox_osdsw_aux2_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_osdsw_aux3_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelOSDSwitch"
+                    android:layout_toEndOf="@+id/checkbox_osdsw_aux3_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_osdsw_aux3_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelOSDSwitch"
+                    android:layout_toEndOf="@+id/checkbox_osdsw_aux3_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- OSDSwitch Checkbox - AUX4 -->
+                <CheckBox
+                    android:id="@+id/checkbox_osdsw_aux4_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelOSDSwitch"
+                    android:layout_toEndOf="@+id/checkbox_osdsw_aux3_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_osdsw_aux4_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelOSDSwitch"
+                    android:layout_toEndOf="@+id/checkbox_osdsw_aux4_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_osdsw_aux4_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelOSDSwitch"
+                    android:layout_toEndOf="@+id/checkbox_osdsw_aux4_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Mission Checkbox - AUX1 -->
+                <CheckBox
+                    android:id="@+id/checkbox_mission_aux1_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelMission"
+                    android:layout_toEndOf="@+id/labelMission"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_mission_aux1_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelMission"
+                    android:layout_toEndOf="@+id/checkbox_mission_aux1_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_mission_aux1_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelMission"
+                    android:layout_toEndOf="@+id/checkbox_mission_aux1_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Mission Checkbox - AUX2 -->
+                <CheckBox
+                    android:id="@+id/checkbox_mission_aux2_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelMission"
+                    android:layout_toEndOf="@+id/checkbox_mission_aux1_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_mission_aux2_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelMission"
+                    android:layout_toEndOf="@+id/checkbox_mission_aux2_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_mission_aux2_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelMission"
+                    android:layout_toEndOf="@+id/checkbox_mission_aux2_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Mission Checkbox - AUX3 -->
+                <CheckBox
+                    android:id="@+id/checkbox_mission_aux3_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelMission"
+                    android:layout_toEndOf="@+id/checkbox_mission_aux2_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_mission_aux3_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelMission"
+                    android:layout_toEndOf="@+id/checkbox_mission_aux3_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_mission_aux3_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelMission"
+                    android:layout_toEndOf="@+id/checkbox_mission_aux3_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Mission Checkbox - AUX4 -->
+                <CheckBox
+                    android:id="@+id/checkbox_mission_aux4_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelMission"
+                    android:layout_toEndOf="@+id/checkbox_mission_aux3_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_mission_aux4_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelMission"
+                    android:layout_toEndOf="@+id/checkbox_mission_aux4_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_mission_aux4_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelMission"
+                    android:layout_toEndOf="@+id/checkbox_mission_aux4_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Land Checkbox - AUX1 -->
+                <CheckBox
+                    android:id="@+id/checkbox_land_aux1_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLand"
+                    android:layout_toEndOf="@+id/labelLand"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_land_aux1_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLand"
+                    android:layout_toEndOf="@+id/checkbox_land_aux1_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_land_aux1_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLand"
+                    android:layout_toEndOf="@+id/checkbox_land_aux1_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Land Checkbox - AUX2 -->
+                <CheckBox
+                    android:id="@+id/checkbox_land_aux2_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLand"
+                    android:layout_toEndOf="@+id/checkbox_land_aux1_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_land_aux2_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLand"
+                    android:layout_toEndOf="@+id/checkbox_land_aux2_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_land_aux2_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLand"
+                    android:layout_toEndOf="@+id/checkbox_land_aux2_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Land Checkbox - AUX3 -->
+                <CheckBox
+                    android:id="@+id/checkbox_land_aux3_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLand"
+                    android:layout_toEndOf="@+id/checkbox_land_aux2_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_land_aux3_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLand"
+                    android:layout_toEndOf="@+id/checkbox_land_aux3_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_land_aux3_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLand"
+                    android:layout_toEndOf="@+id/checkbox_land_aux3_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+                <!-- Land Checkbox - AUX4 -->
+                <CheckBox
+                    android:id="@+id/checkbox_land_aux4_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLand"
+                    android:layout_toEndOf="@+id/checkbox_land_aux3_high"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_land_aux4_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLand"
+                    android:layout_toEndOf="@+id/checkbox_land_aux4_low"
+                    android:buttonTint="@color/colorWhite" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_land_aux4_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@+id/labelLand"
+                    android:layout_toEndOf="@+id/checkbox_land_aux4_medium"
+                    android:buttonTint="@color/colorWhite" />
+
+            </RelativeLayout>
+        </ScrollView>
+    </HorizontalScrollView>
+
+    <!-- Buttons for Applications -->
+    <RelativeLayout
+        android:id="@+id/layoutAppButtonControls"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layoutHorizontalView"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginTop="3dp">
+
+        <Button
+            android:id="@+id/button_read_config"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/rounded_corner_button_type_1"
+            android:text="@string/label_button_read"
+            android:textColor="@color/colorWhite"
+            android:textStyle="normal" />
+
+        <Button
+            android:id="@+id/button_reset"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignTop="@+id/button_read_config"
+            android:layout_toEndOf="@+id/button_read_config"
+            android:layout_marginLeft="1dp"
+            android:background="@drawable/rounded_corner_button_type_2"
+            android:text="@string/label_button_reset"
+            android:textColor="@color/colorWhite"
+            android:textStyle="normal" />
+
+        <Button
+            android:id="@+id/button_calibrate_mag"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignTop="@+id/button_read_config"
+            android:layout_toEndOf="@+id/button_reset"
+            android:layout_marginLeft="1dp"
+            android:background="@drawable/rounded_corner_button_type_3"
+            android:text="@string/label_button_calib_mac"
+            android:textColor="@color/colorWhite"
+            android:textStyle="normal" />
+
+        <Button
+            android:id="@+id/button_calibrate_acc"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignTop="@+id/button_read_config"
+            android:layout_toEndOf="@+id/button_calibrate_mag"
+            android:layout_marginLeft="1dp"
+            android:background="@drawable/rounded_corner_button_type_3"
+            android:text="@string/label_button_calib_acc"
+            android:textColor="@color/colorWhite"
+            android:textStyle="normal" />
+
+        <Button
+            android:id="@+id/button_start_stop"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_below="@+id/button_read_config"
+            android:layout_alignLeft="@+id/button_read_config"
+            android:layout_marginLeft="1dp"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/rounded_corner_button_type_3"
+            android:text="@string/label_button_start"
+            android:textColor="@color/colorWhite"
+            android:textStyle="normal" />
+
+        <Button
+            android:id="@+id/button_write"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignTop="@+id/button_start_stop"
+            android:layout_alignLeft="@+id/button_reset"
+            android:layout_marginLeft="1dp"
+            android:background="@drawable/rounded_corner_button_type_3"
+            android:text="@string/label_button_write"
+            android:textColor="@color/colorWhite"
+            android:textStyle="normal" />
+
+
+        <Button
+            android:id="@+id/button_settings"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignTop="@+id/button_start_stop"
+            android:layout_alignLeft="@+id/button_calibrate_mag"
+            android:layout_marginLeft="1dp"
+            android:background="@drawable/rounded_corner_button_type_3"
+            android:text="@string/label_button_settings"
+            android:textColor="@color/colorWhite"
+            android:textStyle="normal" />
+
+        <Button
+            android:id="@+id/button_exit"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignTop="@+id/button_start_stop"
+            android:layout_alignLeft="@+id/button_calibrate_acc"
+            android:layout_marginLeft="1dp"
+            android:background="@drawable/rounded_corner_button_type_3"
+            android:text="@string/label_button_exit"
+            android:textColor="@color/colorWhite"
+            android:textStyle="normal" />
+
+    </RelativeLayout>
+</RelativeLayout>
