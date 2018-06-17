@@ -1,5 +1,6 @@
 package com.englebertlai.multikwad;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -16,7 +17,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import app.akexorcist.bluetotohspp.library.BluetoothSPP;
+import app.akexorcist.bluetotohspp.library.*;
 
 public class CommunicationChannelActivity extends AppCompatActivity {
     Context communication_channel_activity_context;                         // For handling context
@@ -25,6 +26,7 @@ public class CommunicationChannelActivity extends AppCompatActivity {
     SharedPreferences.Editor editPreferences;                               // For editing configurations settings
     String LOGID;                                                           // For Logging ID
     String communication_channel;                                           // Determine bluetooth or serial port
+    String bluetooth_macaddr;                                               // Bluetooth MacAddress
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,81 +49,7 @@ public class CommunicationChannelActivity extends AppCompatActivity {
         button_bluetooth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog alertDialog = new AlertDialog.Builder(communication_channel_activity_context).create();
-
-                TextView title = new TextView(
-                        communication_channel_activity_context);                // Set Custom Title
-
-                                                                                // Title Properties
-                title.setText("Bluetooth Selected");
-                title.setPadding(10, 10, 10, 10);        // Set Position
-                title.setGravity(Gravity.CENTER);
-                title.setTextColor(Color.BLACK);
-                title.setTextSize(20);
-                alertDialog.setCustomTitle(title);
-
-                TextView msg = new TextView(
-                        communication_channel_activity_context);                // Set Message
-                msg.setText(                                                    // Message Properties
-                        "Selected bluetooth device for communicating with MultiWii FC.");
-                msg.setGravity(Gravity.CENTER_HORIZONTAL);
-                msg.setTextColor(Color.BLACK);
-                alertDialog.setView(msg);
-
-                // Set Button
-                // you can more buttons
-                alertDialog.setButton(
-                        AlertDialog.BUTTON_NEUTRAL,
-                        "OK",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                // TODO: Later remove the code and put to a function
-                                // Pick a channel of the bluetooth scanned data
-                                // REF:
-                                // 1. https://stackoverflow.com/questions/3624280/how-to-use-sharedpreferences-in-android-to-store-fetch-and-edit-values
-                                // 2. https://github.com/englebert/Android-BluetoothSPPLibrary
-                                sharedPreferences = communication_channel_activity_context.getSharedPreferences(
-                                        "com.englebertlai.multikwad", Context.MODE_PRIVATE);
-                                editPreferences = sharedPreferences.edit();
-                                editPreferences.putString(
-                                        "communication_channel", "BLUETOOTH");
-                                editPreferences.apply();                        // Save Settings
-
-                                Intent intent = new Intent(communication_channel_activity_context, MainActivity.class);
-                                // intent.putExtra("key", value); <---- For parsing parameters in future
-                                CommunicationChannelActivity.this.startActivity(intent);
-                                CommunicationChannelActivity.this.overridePendingTransition(0, 0);
-                                finish();
-                            }
-                        });
-
-                alertDialog.setButton(
-                        AlertDialog.BUTTON_NEGATIVE,
-                        "CANCEL",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                // Perform Action on Button
-                            }
-                        });
-
-                new Dialog(communication_channel_activity_context);
-                alertDialog.show();
-
-                // Set Properties for OK Button
-                final Button okBT = alertDialog.getButton(AlertDialog.BUTTON_NEUTRAL);
-                LinearLayout.LayoutParams neutralBtnLP =
-                        (LinearLayout.LayoutParams) okBT.getLayoutParams();
-                neutralBtnLP.gravity = Gravity.FILL_HORIZONTAL;
-                okBT.setPadding(50, 10, 10, 10);   // Set Position
-                okBT.setTextColor(Color.BLUE);
-                okBT.setLayoutParams(neutralBtnLP);
-
-                final Button cancelBT = alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
-                LinearLayout.LayoutParams negBtnLP =
-                        (LinearLayout.LayoutParams) okBT.getLayoutParams();
-                negBtnLP.gravity = Gravity.FILL_HORIZONTAL;
-                cancelBT.setTextColor(Color.RED);
-                cancelBT.setLayoutParams(negBtnLP);
+                loadBluetoothScan();
             }
         });
 /*
@@ -137,5 +65,107 @@ public class CommunicationChannelActivity extends AppCompatActivity {
         });
         */
     }
-}
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == BluetoothState.REQUEST_CONNECT_DEVICE) {
+            if(resultCode == Activity.RESULT_OK){
+                String result = data.getStringExtra("BLUETOOTH_DEVICE");
+                Log.d(LOGID, "BLUETOOTH_DEVICE: " + result);
+
+                bluetooth_macaddr = result.split("\n")[1];
+                Log.d(LOGID, "BLUETOOTH_MAC: " + bluetooth_macaddr);
+
+                showBluetoothSelected();
+            }
+
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+    }
+    private void loadBluetoothScan() {
+        Intent intent = new Intent(getApplicationContext(), BluetoothScanActivity.class);
+        startActivityForResult(intent, BluetoothState.REQUEST_CONNECT_DEVICE);
+    }
+
+    private void showBluetoothSelected() {
+        AlertDialog alertDialog = new AlertDialog.Builder(communication_channel_activity_context).create();
+
+        TextView title = new TextView(
+                communication_channel_activity_context);                // Set Custom Title
+
+        // Title Properties
+        title.setText("Bluetooth Selected");
+        title.setPadding(10, 10, 10, 10);        // Set Position
+        title.setGravity(Gravity.CENTER);
+        title.setTextColor(Color.BLACK);
+        title.setTextSize(20);
+        alertDialog.setCustomTitle(title);
+
+        TextView msg = new TextView(
+                communication_channel_activity_context);                // Set Message
+        msg.setText(                                                    // Message Properties
+                "Selected bluetooth device for communicating with MultiWii FC.");
+        msg.setGravity(Gravity.CENTER_HORIZONTAL);
+        msg.setTextColor(Color.BLACK);
+        alertDialog.setView(msg);
+
+        // Set Button
+        // you can more buttons
+        alertDialog.setButton(
+                AlertDialog.BUTTON_NEUTRAL,
+                "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // TODO: Later remove the code and put to a function
+                        // Pick a channel of the bluetooth scanned data
+                        // REF:
+                        // 1. https://stackoverflow.com/questions/3624280/how-to-use-sharedpreferences-in-android-to-store-fetch-and-edit-values
+                        // 2. https://github.com/englebert/Android-BluetoothSPPLibrary
+                        sharedPreferences = communication_channel_activity_context.getSharedPreferences(
+                                "com.englebertlai.multikwad", Context.MODE_PRIVATE);
+                        editPreferences = sharedPreferences.edit();
+                        editPreferences.putString(
+                                "communication_channel", "BLUETOOTH");
+                        editPreferences.putString(
+                                "bluetooth_macaddr", bluetooth_macaddr);
+                        editPreferences.apply();                        // Save Settings
+
+                        Intent intent = new Intent(communication_channel_activity_context, MainActivity.class);
+                        // intent.putExtra("key", value); <---- For parsing parameters in future
+                        CommunicationChannelActivity.this.startActivity(intent);
+                        CommunicationChannelActivity.this.overridePendingTransition(0, 0);
+                        finish();
+                    }
+                });
+
+        alertDialog.setButton(
+                AlertDialog.BUTTON_NEGATIVE,
+                "CANCEL",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Perform Action on Button
+                    }
+                });
+
+        new Dialog(communication_channel_activity_context);
+        alertDialog.show();
+
+        // Set Properties for OK Button
+        final Button okBT = alertDialog.getButton(AlertDialog.BUTTON_NEUTRAL);
+        LinearLayout.LayoutParams neutralBtnLP =
+                (LinearLayout.LayoutParams) okBT.getLayoutParams();
+        neutralBtnLP.gravity = Gravity.FILL_HORIZONTAL;
+        okBT.setPadding(50, 10, 10, 10);   // Set Position
+        okBT.setTextColor(Color.BLUE);
+        okBT.setLayoutParams(neutralBtnLP);
+
+        final Button cancelBT = alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+        LinearLayout.LayoutParams negBtnLP =
+                (LinearLayout.LayoutParams) okBT.getLayoutParams();
+        negBtnLP.gravity = Gravity.FILL_HORIZONTAL;
+        cancelBT.setTextColor(Color.RED);
+        cancelBT.setLayoutParams(negBtnLP);
+    }
+}

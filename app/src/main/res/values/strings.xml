@@ -69,6 +69,10 @@
     <string name="label_button_otg_serialport">OTG SERIAL PORT</string>
     <string name="label_communication_selection">Please select which port to communicate with the Flight Controller:</string>
 
+    <!-- Bluetooth Scan -->
+    <string name="label_bluetooth_tips">Press SCAN to list the bluetooth connection to MultiWii Flight Controller.</string>
+    <string name="label_button_scan_bluetooth">SCAN BLUETOOTH MULTIWII FC DEVICES</string>
+
     <!-- Common values -->
     <string name="default_0">0</string>
     <string name="default_0_0">0.0</string>

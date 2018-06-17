@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;                                    // For configuration settings
     String LOGID;                                                           // For Logging ID
     String communication_channel;                                           // Determine bluetooth or serial port
+    String bluetooth_macaddr;                                               // Bluetooth MacAddress
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         // If there is no settings on bluetooth or serial then will show this dialogue box
         // Temporary only bluetooth for now
         communication_channel = sharedPreferences.getString("communication_channel", "");
+        bluetooth_macaddr = sharedPreferences.getString("bluetooth_macaddr", "");
+
         if(communication_channel.equals("")) {
             Log.d(LOGID, "Loading communication channel activity");
             Intent intent = new Intent(main_activity_context, CommunicationChannelActivity.class);
@@ -52,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
             this.finish();
         }
         Log.d(LOGID, "Communication channel: " + communication_channel);
+        Log.d(LOGID, "Bluetooth Mac Addr: " + bluetooth_macaddr);
 
         Button button_exit = (Button) findViewById(R.id.button_exit);
         button_exit.setOnClickListener(new View.OnClickListener() {
