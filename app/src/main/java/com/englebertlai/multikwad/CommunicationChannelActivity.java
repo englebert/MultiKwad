@@ -52,18 +52,14 @@ public class CommunicationChannelActivity extends AppCompatActivity {
                 loadBluetoothScan();
             }
         });
-/*
-        Button button_flight_mode = (Button) findViewById(R.id.button_flight_mode);
-        button_flight_mode.setOnClickListener(new View.OnClickListener() {
+
+        Button button_otg_serial_port = (Button) findViewById(R.id.button_otg_serialport);
+        button_otg_serial_port.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(main_activity_context, FlightModeActivity.class);
-                // intent.putExtra("key", value); <---- For parsing parameters in future
-                MainActivity.this.startActivity(intent);
-                MainActivity.this.overridePendingTransition(0, 0);
+                loadOTGSerialPort();
             }
         });
-        */
     }
 
     @Override
@@ -87,6 +83,67 @@ public class CommunicationChannelActivity extends AppCompatActivity {
     private void loadBluetoothScan() {
         Intent intent = new Intent(getApplicationContext(), BluetoothScanActivity.class);
         startActivityForResult(intent, BluetoothState.REQUEST_CONNECT_DEVICE);
+    }
+
+    private void loadOTGSerialPort() {
+        AlertDialog alertDialog = new AlertDialog.Builder(communication_channel_activity_context).create();
+
+        TextView title = new TextView(
+                communication_channel_activity_context);                // Set Custom Title
+
+        // Title Properties
+        title.setText("OTG Serial Port Selected");
+        title.setPadding(10, 10, 10, 10);        // Set Position
+        title.setGravity(Gravity.CENTER);
+        title.setTextColor(Color.BLACK);
+        title.setTextSize(20);
+        alertDialog.setCustomTitle(title);
+
+        TextView msg = new TextView(
+                communication_channel_activity_context);                // Set Message
+        msg.setText(                                                    // Message Properties
+                "Selected OTG Serial Port for communicating with MultiWii FC. Unfortunately is not available for now. In progress developing.");
+        msg.setGravity(Gravity.CENTER_HORIZONTAL);
+        msg.setTextColor(Color.BLACK);
+        alertDialog.setView(msg);
+
+        // Set Button
+        // you can more buttons
+        alertDialog.setButton(
+                AlertDialog.BUTTON_NEUTRAL,
+                "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+
+        alertDialog.setButton(
+                AlertDialog.BUTTON_NEGATIVE,
+                "CANCEL",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Perform Action on Button
+                    }
+                });
+
+        new Dialog(communication_channel_activity_context);
+        alertDialog.show();
+
+        // Set Properties for OK Button
+        final Button okBT = alertDialog.getButton(AlertDialog.BUTTON_NEUTRAL);
+        LinearLayout.LayoutParams neutralBtnLP =
+                (LinearLayout.LayoutParams) okBT.getLayoutParams();
+        neutralBtnLP.gravity = Gravity.FILL_HORIZONTAL;
+        okBT.setPadding(50, 10, 10, 10);   // Set Position
+        okBT.setTextColor(Color.BLUE);
+        okBT.setLayoutParams(neutralBtnLP);
+
+        final Button cancelBT = alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+        LinearLayout.LayoutParams negBtnLP =
+                (LinearLayout.LayoutParams) okBT.getLayoutParams();
+        negBtnLP.gravity = Gravity.FILL_HORIZONTAL;
+        cancelBT.setTextColor(Color.RED);
+        cancelBT.setLayoutParams(negBtnLP);
     }
 
     private void showBluetoothSelected() {

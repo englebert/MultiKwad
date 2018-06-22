@@ -22,7 +22,5 @@
         <activity android:label="@string/app_name" android:name="FlightModeActivity"/>
         <activity android:label="@string/app_name" android:name="CommunicationChannelActivity"/>
         <activity android:label="@string/app_name" android:name=".BluetoothScanActivity"/>
-        <activity android:name="app.akexorcist.bluetoothspp.DeviceList" />
     </application>
-
 </manifest>

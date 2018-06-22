@@ -32,6 +32,7 @@
     <string name="label_button_calib_mac">C MAG</string>
     <string name="label_button_calib_acc">C ACC</string>
     <string name="label_button_flight_mode">&gt;</string>
+    <string name="label_button_back">BACK</string>
 
     <!-- Settings Screen -->
     <string name="label_s_arm">ARM</string>

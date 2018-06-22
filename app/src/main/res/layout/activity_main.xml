@@ -313,6 +313,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="5dp"
+        android:layout_marginBottom="2dp"
         android:background="@drawable/custom_border">
 
         <!-- Pos -->
@@ -685,7 +686,8 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@+id/layoutMidPointControls"
-            android:layout_marginLeft="2dp"
+            android:layout_alignBottom="@+id/layoutMidPointControls"
+            android:layout_marginLeft="5dp"
             android:layout_marginRight="0dp"
             android:layout_marginTop="0dp"
             android:background="@drawable/custom_border">
@@ -797,8 +799,11 @@
 
         <Button
             android:id="@+id/button_read_config"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:background="@drawable/rounded_corner_button_type_1"
@@ -808,23 +813,25 @@
 
         <Button
             android:id="@+id/button_reset"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginLeft="2dp"
             android:layout_alignTop="@+id/button_read_config"
             android:layout_toEndOf="@+id/button_read_config"
-            android:layout_marginLeft="1dp"
-            android:background="@drawable/rounded_corner_button_type_2"
+            android:background="@drawable/rounded_corner_button_type_3"
             android:text="@string/label_button_reset"
             android:textColor="@color/colorWhite"
             android:textStyle="normal" />
 
         <Button
             android:id="@+id/button_calibrate_mag"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginLeft="2dp"
             android:layout_alignTop="@+id/button_read_config"
             android:layout_toEndOf="@+id/button_reset"
-            android:layout_marginLeft="1dp"
             android:background="@drawable/rounded_corner_button_type_3"
             android:text="@string/label_button_calib_mac"
             android:textColor="@color/colorWhite"
@@ -832,11 +839,12 @@
 
         <Button
             android:id="@+id/button_calibrate_acc"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginLeft="2dp"
             android:layout_alignTop="@+id/button_read_config"
             android:layout_toEndOf="@+id/button_calibrate_mag"
-            android:layout_marginLeft="1dp"
             android:background="@drawable/rounded_corner_button_type_3"
             android:text="@string/label_button_calib_acc"
             android:textColor="@color/colorWhite"
@@ -844,11 +852,11 @@
 
         <Button
             android:id="@+id/button_start_stop"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="2dp"
             android:layout_below="@+id/button_read_config"
             android:layout_alignLeft="@+id/button_read_config"
-            android:layout_marginLeft="1dp"
             android:layout_marginTop="3dp"
             android:background="@drawable/rounded_corner_button_type_3"
             android:text="@string/label_button_start"
@@ -857,11 +865,11 @@
 
         <Button
             android:id="@+id/button_write"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="5dp"
             android:layout_alignTop="@+id/button_start_stop"
             android:layout_alignLeft="@+id/button_reset"
-            android:layout_marginLeft="1dp"
             android:background="@drawable/rounded_corner_button_type_3"
             android:text="@string/label_button_write"
             android:textColor="@color/colorWhite"
@@ -870,11 +878,11 @@
 
         <Button
             android:id="@+id/button_settings"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="5dp"
             android:layout_alignTop="@+id/button_start_stop"
             android:layout_alignLeft="@+id/button_calibrate_mag"
-            android:layout_marginLeft="1dp"
             android:background="@drawable/rounded_corner_button_type_3"
             android:text="@string/label_button_settings"
             android:textColor="@color/colorWhite"
@@ -882,12 +890,12 @@
 
         <Button
             android:id="@+id/button_exit"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="5dp"
             android:layout_alignTop="@+id/button_start_stop"
             android:layout_alignLeft="@+id/button_calibrate_acc"
-            android:layout_marginLeft="1dp"
-            android:background="@drawable/rounded_corner_button_type_3"
+            android:background="@drawable/rounded_corner_button_type_2"
             android:text="@string/label_button_exit"
             android:textColor="@color/colorWhite"
             android:textStyle="normal" />
