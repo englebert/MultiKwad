@@ -27,6 +27,7 @@ public class CommunicationChannelActivity extends AppCompatActivity {
     String LOGID;                                                           // For Logging ID
     String communication_channel;                                           // Determine bluetooth or serial port
     String bluetooth_macaddr;                                               // Bluetooth MacAddress
+    String bluetooth_id;                                                    // Bluetooth ID
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +71,10 @@ public class CommunicationChannelActivity extends AppCompatActivity {
                 Log.d(LOGID, "BLUETOOTH_DEVICE: " + result);
 
                 bluetooth_macaddr = result.split("\n")[1];
-                Log.d(LOGID, "BLUETOOTH_MAC: " + bluetooth_macaddr);
+                bluetooth_id = result.split("\n")[0];
+
+                Log.d(LOGID, "CHOSEN BLUETOOTH_MAC: " + bluetooth_macaddr);
+                Log.d(LOGID, "CHOSEN BLUETOOTH_ID: " + bluetooth_id);
 
                 showBluetoothSelected();
             }
@@ -183,10 +187,10 @@ public class CommunicationChannelActivity extends AppCompatActivity {
                         sharedPreferences = communication_channel_activity_context.getSharedPreferences(
                                 "com.englebertlai.multikwad", Context.MODE_PRIVATE);
                         editPreferences = sharedPreferences.edit();
-                        editPreferences.putString(
-                                "communication_channel", "BLUETOOTH");
-                        editPreferences.putString(
-                                "bluetooth_macaddr", bluetooth_macaddr);
+                        editPreferences
+                                .putString("communication_channel", "BLUETOOTH")
+                                .putString("bluetooth_macaddr", bluetooth_macaddr)
+                                .putString("bluetooth_id", bluetooth_id);
                         editPreferences.apply();                        // Save Settings
 
                         Intent intent = new Intent(communication_channel_activity_context, MainActivity.class);
