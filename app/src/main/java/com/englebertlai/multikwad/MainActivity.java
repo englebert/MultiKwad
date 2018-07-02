@@ -61,18 +61,6 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == BluetoothState.REQUEST_CONNECT_DEVICE) {
-            if(resultCode == Activity.RESULT_OK)
-                bt.connect(data);
-        } else if(requestCode == BluetoothState.REQUEST_ENABLE_BT) {
-            if(resultCode == Activity.RESULT_OK) {
-                bt.setupService();
-                bt.startService(BluetoothState.DEVICE_ANDROID);
-                setup();
-            } else {
-                // Do something if user doesn't choose any device (Pressed back)
-            }
-        }
     }
 
     @Override
@@ -136,6 +124,7 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
         button_exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                bt.stopService();
                 finish();
             }
         });
@@ -285,7 +274,6 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
         Log.d(LOGID, "IS BLUETOOTH AVAILABLE: " + bt.isBluetoothAvailable());
         Log.d(LOGID, "IS SERVICE AVAILABLE: " + bt.isServiceAvailable());
 
-
     }
 
     private void loadFlightModeActivity() {
@@ -294,58 +282,4 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
         MainActivity.this.startActivity(intent);
         // MainActivity.this.overridePendingTransition(0, 0);
     }
-
-//    @SuppressLint("HandlerLeak")
-//    private final Handler mHandler = new Handler() {
-//        public void handleMessage(Message msg) {
-//            switch (msg.what) {
-//                case BluetoothState.MESSAGE_WRITE:
-//                    break;
-//                case BluetoothState.MESSAGE_READ:
-//                    byte[] readBuf = (byte[]) msg.obj;
-//                    String readMessage = new String(readBuf);
-//                    if(readBuf != null && readBuf.length > 0) {
-//                        if(mDataReceivedListener != null)
-//                            mDataReceivedListener.onDataReceived(readBuf, readMessage);
-//                    }
-//                    break;
-//                case BluetoothState.MESSAGE_DEVICE_NAME:
-////                    mDeviceName = msg.getData().getString(BluetoothState.DEVICE_NAME);
-////                    mDeviceAddress = msg.getData().getString(BluetoothState.DEVICE_ADDRESS);
-////                    if(mBluetoothConnectionListener != null)
-////                        mBluetoothConnectionListener.onDeviceConnected(mDeviceName, mDeviceAddress);
-////                    isConnected = true;
-//                    break;
-//                case BluetoothState.MESSAGE_TOAST:
-//                    Toast.makeText(main_activity_context, msg.getData().getString(BluetoothState.TOAST), Toast.LENGTH_SHORT).show();
-//                    break;
-//
-//                case BluetoothState.MESSAGE_STATE_CHANGE:
-////                    if(mBluetoothStateListener != null)
-////                        mBluetoothStateListener.onServiceStateChanged(msg.arg1);
-////                    if(isConnected && msg.arg1 != BluetoothState.STATE_CONNECTED) {
-////                        if(mBluetoothConnectionListener != null)
-////                            mBluetoothConnectionListener.onDeviceDisconnected();
-////                        if(isAutoConnectionEnabled) {
-////                            isAutoConnectionEnabled = false;
-////                            autoConnect(keyword);
-////                        }
-////                        isConnected = false;
-////                        mDeviceName = null;
-////                        mDeviceAddress = null;
-////                    }
-////
-////                    if(!isConnecting && msg.arg1 == BluetoothState.STATE_CONNECTING) {
-////                        isConnecting = true;
-////                    } else if(isConnecting) {
-////                        if(msg.arg1 != BluetoothState.STATE_CONNECTED) {
-////                            if(mBluetoothConnectionListener != null)
-////                                mBluetoothConnectionListener.onDeviceConnectionFailed();
-////                        }
-////                        isConnecting = false;
-////                    }
-//                    break;
-//            }
-//        }
-//    };
 }
