@@ -30,7 +30,6 @@ import java.util.List;
 import app.akexorcist.bluetotohspp.library.BluetoothSPP;
 import app.akexorcist.bluetotohspp.library.BluetoothService;
 import app.akexorcist.bluetotohspp.library.BluetoothState;
-import app.akexorcist.bluetotohspp.library.*;
 
 public class MainActivity extends AppCompatActivity implements SimpleGestureFilter.SimpleGestureListener {
     Context main_activity_context;                                          // For handling context
@@ -382,6 +381,8 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
     }
 
     private void tx2Wii(int code, String data) {
+        if(code == 0) return;
+
         List<Byte> total_data = new LinkedList<Byte>();
         String MSP_HEADER = "$M<";
 
@@ -414,6 +415,7 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
         int i = 0;
         for(byte b : total_data) {
             command[i++] = b;
+            Log.d(LOGID, "OUT: " + b);
         }
 
         bt.send(command, false);
