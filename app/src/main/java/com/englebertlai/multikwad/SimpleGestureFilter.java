@@ -1,7 +1,6 @@
 package com.englebertlai.multikwad;
 
 import android.app.Activity;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
@@ -101,25 +100,17 @@ public class SimpleGestureFilter extends SimpleOnGestureListener {
         final float xDistance = Math.abs(e1.getX() - e2.getX());
         final float yDistance = Math.abs(e1.getY() - e2.getY());
 
-        // Log.d("MKWAD", "xDistance: " + xDistance + " this.X: " + this.swipe_Max_Distance);
-
         if(xDistance > this.swipe_Max_Distance || yDistance > this.swipe_Max_Distance)
             return false;
-
-        // Log.d("MYKWAD", "Checking Velocity");
 
         velocityX = Math.abs(velocityX);
         velocityY = Math.abs(velocityY);
         boolean result = false;
 
-        // Log.d("MKWAD", "Vx: " + velocityX + " Vy: " + velocityY + " xD: " + xDistance + " yD: " + yDistance);
-
         if(velocityX > this.swipe_Min_Velocity && xDistance > this.swipe_Min_Distance){
             if(e1.getX() > e2.getX()) { // right to left
-                // Log.d("MYKWAD", "SWIPE_LEFT");
                 this.listener.onSwipe(SWIPE_LEFT);
             } else {
-                // Log.d("MYKWAD", "SWIPE_RIGHT");
                 this.listener.onSwipe(SWIPE_RIGHT);
             }
 
