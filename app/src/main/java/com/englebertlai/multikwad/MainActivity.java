@@ -1,18 +1,12 @@
 package com.englebertlai.multikwad;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,7 +22,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import app.akexorcist.bluetotohspp.library.BluetoothSPP;
-import app.akexorcist.bluetotohspp.library.BluetoothService;
 import app.akexorcist.bluetotohspp.library.BluetoothState;
 
 public class MainActivity extends AppCompatActivity implements SimpleGestureFilter.SimpleGestureListener {
@@ -41,6 +34,88 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
     String bluetooth_id;                                                    // Bluetooth ID
     private SimpleGestureFilter detector;                                   // For Swipe Gesture use
     private Boolean connectionStatus = false;                               // For connection status
+
+    static int CHECKBOXITEMS=0;
+    static int PIDITEMS=10;
+
+    private static final int
+            IDLE = 0,
+            HEADER_START = 1,
+            HEADER_M = 2,
+            HEADER_ARROW = 3,
+            HEADER_SIZE = 4,
+            HEADER_CMD = 5,
+            HEADER_ERR = 6;
+
+    private int c_state = IDLE;
+    boolean err_rcvd = false;
+    byte checksum=0;
+    byte cmd;
+    int offset=0, dataSize=0;
+    byte[] inBuf = new byte[256];
+    int p;
+    int read32() {return (inBuf[p++]&0xff) + ((inBuf[p++]&0xff)<<8) + ((inBuf[p++]&0xff)<<16) + ((inBuf[p++]&0xff)<<24); }
+    int read16() {return (inBuf[p++]&0xff) + ((inBuf[p++])<<8); }
+    int read8()  {return  inBuf[p++]&0xff;}
+
+    int mode;
+
+    // MultiWii Parameters
+    int byteRC_RATE,byteRC_EXPO, byteRollPitchRate,byteYawRate, byteDynThrPID,byteThrottle_EXPO, byteThrottle_MID, byteSelectSetting,
+            cycleTime, i2cError, version, versionMisMatch,horizonInstrSize, GPS_distanceToHome, GPS_directionToHome, GPS_numSat, GPS_fix,
+            GPS_update, GPS_altitude, GPS_speed, GPS_latitude, GPS_longitude, init_com, graph_on, pMeterSum, intPowerTrigger, bytevbat;
+
+    int multiCapability = 0; // Bitflags stating what capabilities are/are not present in the compiled code.
+    int byteMP[] = new int[8];  // Motor Pins.  Varies by multiType and Arduino model (pro Mini, Mega, etc).
+    int MConf[]  = new int[10]; // Min/Maxthro etc
+    int byteP[] = new int[PIDITEMS], byteI[] = new int[PIDITEMS], byteD[] = new int[PIDITEMS];
+    int activation[];
+    int ServoMID[]       = new int[8];  // Plane,ppm/pwm conv,heli
+    int servoRATE[]      = new int[8];
+    int servoDirection[] = new int[8];
+    int ServoMIN[]       = new int[8];
+    int ServoMAX[]       = new int[8];
+    int wingDir[]        = new int[8];  // Flying wing
+    int wingPos[]        = new int[8];
+    int In[]             = new int[8];
+
+
+    boolean toggleRead = false,
+            toggleReset = false,
+            toggleCalibAcc = false,
+            toggleCalibMag = false,
+            toggleWrite = false,
+            toggleRXbind = false,
+            toggleSetSetting = false,
+            toggleVbat=true,
+            toggleMotor=false,
+            motorcheck=true;
+
+    int multiType;  // 1 for tricopter, 2 for quad+, 3 for quadX, ...
+
+    // Alias for multiTypes
+    private static final int 
+            TRI           = 1,
+            QUADP         = 2,
+            QUADX         = 3,
+            BI            = 4,
+            GIMBAL        = 5,
+            Y6            = 6,
+            HEX6          = 7,
+            FLYING_WING   = 8,
+            Y4            = 9,
+            HEX6X         = 10,
+            OCTOX8        = 11,
+            OCTOFLATX     = 12,
+            OCTOFLATP     = 13,
+            AIRPLANE      = 14,
+            HELI_120_CCPM = 15,
+            HELI_90_DEG   = 16,
+            VTAIL4        = 17,
+            HEX6H         = 18,
+            PPM_TO_SERVO  = 19,
+            DUALCOPTER    = 20,
+            SINGLECOPTER  = 21;
 
     // For MultiWii Serial Protocol Use
     private static final int
@@ -106,7 +181,6 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
     public boolean dispatchTouchEvent(MotionEvent me){
         // Call onTouchEvent of SimpleGestureFilter class
         this.detector.onTouchEvent(me);
-        Log.d(LOGID, "Movement: " + me.toString());
         return super.dispatchTouchEvent(me);
     }
 
@@ -254,11 +328,77 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
         cancelBT.setLayoutParams(negBtnLP);
     }
 
+    // Receiving data...
     private void startConnectDevice() {
         bt.setOnDataReceivedListener(new BluetoothSPP.OnDataReceivedListener() {
             @Override
             public void onDataReceived(byte[] data, String message) {
-                Log.d(LOGID, "RECEIVED: " + data + " ### " + message);
+                for(byte c: data) {
+                    if(c_state == IDLE) {
+                        c_state = (c == '$') ? HEADER_START : IDLE;
+                    } else if(c_state == HEADER_START) {
+                        c_state = (c == 'M') ? HEADER_M : IDLE;
+                    } else if (c_state == HEADER_M) {
+                        if (c == '>') {
+                            c_state = HEADER_ARROW;
+                        } else if (c == '!') {
+                            c_state = HEADER_ERR;
+                        } else {
+                            c_state = IDLE;
+                        }
+                    } else if (c_state == HEADER_ARROW || c_state == HEADER_ERR) {
+                        // is this an error message?
+                        err_rcvd = (c_state == HEADER_ERR);             // Expecting payload size
+                        dataSize = (c & 0xff);
+
+                        // Reset index variables
+                        p = 0;
+                        offset = 0;
+                        checksum = 0;
+                        checksum ^= (c & 0xff);
+
+                        // The command is to follow
+                        c_state = HEADER_SIZE;
+                    } else if (c_state == HEADER_SIZE) {
+                        cmd = (byte)(c & 0xff);
+                        checksum ^= (c & 0xff);
+                        c_state = HEADER_CMD;
+                    } else if (c_state == HEADER_CMD && offset < dataSize) {
+                        checksum ^= (c & 0xff);
+                        inBuf[offset++] = (byte)(c & 0xff);
+                    } else if (c_state == HEADER_CMD && offset >= dataSize) {
+                        //  compare calculated and transferred checksum
+                        if ((checksum & 0xff) == (c & 0xff)) {
+                            if (err_rcvd) {
+                                // MultiWii Unable to understand
+                                Log.d(LOGID, "MultiWii unable to understand the request");
+                            } else {
+                                // Process the command
+                                processCommand(cmd, (int)dataSize);
+                            }
+
+                        } else {
+                            Log.d(LOGID,
+                                    "Invalid checksum for command " +
+                                            ((int)(cmd & 0xff)) + ": " +
+                                            (checksum & 0xff) + " expected, got " +
+                                            (int)(c & 0xff));
+                            Log.d(LOGID,
+                                    "<" + (cmd & 0xff) + " " + (dataSize&0xff) + "> {");
+
+                            for(int i = 0; i < dataSize; i++) {
+                                if(i != 0) {
+                                    Log.d(LOGID, "ERROR");
+                                }
+                                Log.d(LOGID, "DEBUG: " + (inBuf[i] & 0xFF));
+                            }
+                            Log.d(LOGID, ("} ["+c+"]"));
+                            Log.d(LOGID, (new String(inBuf, 0, dataSize)));
+                        }
+
+                        c_state = IDLE;
+                    }
+                }
             }
         });
 
@@ -331,6 +471,30 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
 
     }
 
+
+    private void processCommand(byte cmd, int dataSize) {
+        int i;
+        int icmd = (int)(cmd & 0xff);
+        switch (icmd) {
+            case MSP_IDENT:
+                version = read8();
+                multiType = read8();
+                read8(); // MSP version
+                multiCapability = read32(); // capability
+                /* Temporary remark. Later see how to convert it
+                if ((multiCapability&1)>0) {buttonRXbind = controlP5.addButton("bRXbind",1,10,yGraph+205-10,55,10); buttonRXbind.setColorBackground(blue_);buttonRXbind.setLabel("RX Bind");}
+                if ((multiCapability&4)>0) controlP5.addTab("Motors").show();
+                if ((multiCapability&8)>0) flaps=true;
+                if (!GraphicsInited)  create_ServoGraphics();
+                */
+                Log.d(LOGID, "Version: " + version + ", MultiType: " + multiType + ", MultiCapability: " + multiCapability);
+                break;
+
+            default:
+                Log.d(LOGID, "I don't know how to handle this -> " + icmd);
+        }
+    }
+
     private void loadFlightModeActivity() {
         Intent intent = new Intent(main_activity_context, FlightModeActivity.class);
         // intent.putExtra("key", value); <---- For parsing parameters in future
@@ -339,13 +503,8 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
     }
 
     private void readMultiWiiConfig() {
-        // bt.send(new byte[] { 0x30, 0x38, ....}, false);
-        // bt.send("Message", true);
         // TODO:
-        // Try to connect using the header and data
-        // Testing with version
-
-        // Send Message and Wait for replies
+        // Continue with different MSP Protocol and starts integrating to the UI
         requestWii();
     }
 
@@ -376,8 +535,8 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
     private void requestWii() {
         int[] requests = {MSP_IDENT ,MSP_BOXNAMES, MSP_RC_TUNING, MSP_PID, MSP_MOTOR_PINS,MSP_BOX,MSP_MISC};
         tx2Wii(MSP_IDENT, null);
-        tx2Wii(MSP_BOXNAMES, null);
-        tx2Wii(MSP_RC_TUNING, null);
+//        tx2Wii(MSP_BOXNAMES, null);
+//        tx2Wii(MSP_RC_TUNING, null);
     }
 
     private void tx2Wii(int code, String data) {
@@ -407,15 +566,15 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
         }
 
         total_data.add(checksum);
-        Log.d(LOGID, "TX2WII: " + total_data.toString());
-        Log.d(LOGID, "TX2WII checksum: " + checksum);
+//        Log.d(LOGID, "TX2WII: " + total_data.toString());
+//        Log.d(LOGID, "TX2WII checksum: " + checksum);
 
         // Convert to byte from Bytes
         byte[] command = new byte[total_data.size()];
         int i = 0;
         for(byte b : total_data) {
             command[i++] = b;
-            Log.d(LOGID, "OUT: " + b);
+            // Log.d(LOGID, "OUT: " + b);
         }
 
         bt.send(command, false);
