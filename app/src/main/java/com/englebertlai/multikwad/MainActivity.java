@@ -24,9 +24,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import app.akexorcist.bluetotohspp.library.BluetoothSPP;
 import app.akexorcist.bluetotohspp.library.BluetoothService;
 import app.akexorcist.bluetotohspp.library.BluetoothState;
+import app.akexorcist.bluetotohspp.library.*;
 
 public class MainActivity extends AppCompatActivity implements SimpleGestureFilter.SimpleGestureListener {
     Context main_activity_context;                                          // For handling context
@@ -35,12 +39,48 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
     String LOGID;                                                           // For Logging ID
     String communication_channel;                                           // Determine bluetooth or serial port
     String bluetooth_macaddr;                                               // Bluetooth MacAddress
-    String bluetooth_id;                                                  // Bluetooth ID
+    String bluetooth_id;                                                    // Bluetooth ID
     private SimpleGestureFilter detector;                                   // For Swipe Gesture use
     private Boolean connectionStatus = false;                               // For connection status
-    private BluetoothService bt_service = null;
-    private BluetoothAdapter mBluetoothAdapter = null;
-    private BluetoothSPP.OnDataReceivedListener mDataReceivedListener = null;
+
+    // For MultiWii Serial Protocol Use
+    private static final int
+            MSP_IDENT            = 100,
+            MSP_STATUS           = 101,
+            MSP_RAW_IMU          = 102,
+            MSP_SERVO            = 103,
+            MSP_MOTOR            = 104,
+            MSP_RC               = 105,
+            MSP_RAW_GPS          = 106,
+            MSP_COMP_GPS         = 107,
+            MSP_ATTITUDE         = 108,
+            MSP_ALTITUDE         = 109,
+            MSP_ANALOG           = 110,
+            MSP_RC_TUNING        = 111,
+            MSP_PID              = 112,
+            MSP_BOX              = 113,
+            MSP_MISC             = 114,
+            MSP_MOTOR_PINS       = 115,
+            MSP_BOXNAMES         = 116,
+            MSP_PIDNAMES         = 117,
+            MSP_SERVO_CONF       = 120,
+            MSP_SET_RAW_RC       = 200,
+            MSP_SET_RAW_GPS      = 201,
+            MSP_SET_PID          = 202,
+            MSP_SET_BOX          = 203,
+            MSP_SET_RC_TUNING    = 204,
+            MSP_ACC_CALIBRATION  = 205,
+            MSP_MAG_CALIBRATION  = 206,
+            MSP_SET_MISC         = 207,
+            MSP_RESET_CONF       = 208,
+            MSP_SELECT_SETTING   = 210,
+            MSP_SET_HEAD         = 211, // Not used
+            MSP_SET_SERVO_CONF   = 212,
+            MSP_SET_MOTOR        = 214,
+            MSP_BIND             = 240,
+            MSP_EEPROM_WRITE     = 250,
+            MSP_DEBUGMSG         = 253,
+            MSP_DEBUG            = 254;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,13 +159,22 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
         Log.d(LOGID, "Bluetooth Mac Addr: " + bluetooth_macaddr);
         Log.d(LOGID, "Bluetooth ID: " + bluetooth_id);
 
-        // Setting up Buttons
+        // Setting up Exit Button
         Button button_exit = (Button) findViewById(R.id.button_exit);
         button_exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 bt.stopService();
                 finish();
+            }
+        });
+
+        // Setting up Read Button
+        Button button_read = (Button) findViewById(R.id.button_read_config);
+        button_read.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                readMultiWiiConfig();
             }
         });
 
@@ -207,8 +256,14 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
     }
 
     private void startConnectDevice() {
+        bt.setOnDataReceivedListener(new BluetoothSPP.OnDataReceivedListener() {
+            @Override
+            public void onDataReceived(byte[] data, String message) {
+                Log.d(LOGID, "RECEIVED: " + data + " ### " + message);
+            }
+        });
+
         // To determine etiher bluetooth or USB to connect
-        // TODO: HERE!!!
         bt.setBluetoothConnectionListener(new BluetoothSPP.BluetoothConnectionListener() {
             public void onDeviceConnected(String name, String address) {
                 // Do something when successfully connected
@@ -264,8 +319,9 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
 
         bt.enable();
         bt.setupService();
-        bt.startService(BluetoothState.DEVICE_OTHER);
-        bt.autoConnect(bluetooth_id);
+        bt.startService(false);
+        bt.connect(bluetooth_macaddr);
+
 
         // Logging section can be disabled. It is just for debugging purposes.
         Log.d(LOGID, "Bluetooth details: " + bluetooth_macaddr + " ### " + bluetooth_id );
@@ -281,5 +337,85 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
         // intent.putExtra("key", value); <---- For parsing parameters in future
         MainActivity.this.startActivity(intent);
         // MainActivity.this.overridePendingTransition(0, 0);
+    }
+
+    private void readMultiWiiConfig() {
+        // bt.send(new byte[] { 0x30, 0x38, ....}, false);
+        // bt.send("Message", true);
+        // TODO:
+        // Try to connect using the header and data
+        // Testing with version
+
+        // Send Message and Wait for replies
+        requestWii();
+    }
+
+    /*
+     * Request Message to MultiWii:
+     * $M<[data length][code][data][checksum]
+     * 1 octet '$'
+     * 1 octet 'M'
+     * 1 octet '<'
+     * 1 octet [data length]
+     * 1 octet [code]
+     * several octet [data]
+     * 1 octet [checksum]
+     *
+     * data length can be 0 in case no param command
+     *
+     * The general format of an MSP message is:
+     * <preamble>,<direction>,<size>,<command>,,<crc>
+     *     Where:
+     *     preamble = the ASCII characters '$M'
+     *     direction = the ASCII character '<' if to the MWC or '>' if from the MWC
+     *     size = number of data bytes, binary. Can be zero as in the case of a data request to the MWC
+     *     command = message_id as per the table below
+     *     data = as per the table below. UINT16 values are LSB first.
+     *     crc = XOR of <size>, <command> and each data byte into a zero'ed sum
+     */
+
+    private void requestWii() {
+        int[] requests = {MSP_IDENT ,MSP_BOXNAMES, MSP_RC_TUNING, MSP_PID, MSP_MOTOR_PINS,MSP_BOX,MSP_MISC};
+        tx2Wii(MSP_IDENT, null);
+        tx2Wii(MSP_BOXNAMES, null);
+        tx2Wii(MSP_RC_TUNING, null);
+    }
+
+    private void tx2Wii(int code, String data) {
+        List<Byte> total_data = new LinkedList<Byte>();
+        String MSP_HEADER = "$M<";
+
+        for(byte c : MSP_HEADER.getBytes()) {
+            total_data.add(c);
+        }
+
+        byte checksum = 0;
+        byte dataLength = (byte)(((data == null) ? 0: data.length()) & 0xff);
+
+        total_data.add(dataLength);
+        checksum ^= (dataLength & 0xff);
+
+        total_data.add((byte)(code & 0xff));
+        checksum ^= (code & 0xff);
+
+        if(data != null) {
+            for(byte c : data.getBytes()) {
+                total_data.add(c);
+                checksum ^= (c & 0xff);
+            }
+        }
+
+        total_data.add(checksum);
+        Log.d(LOGID, "TX2WII: " + total_data.toString());
+        Log.d(LOGID, "TX2WII checksum: " + checksum);
+
+        // Convert to byte from Bytes
+        byte[] command = new byte[total_data.size()];
+        int i = 0;
+        for(byte b : total_data) {
+            command[i++] = b;
+        }
+
+        bt.send(command, false);
     }
 }
