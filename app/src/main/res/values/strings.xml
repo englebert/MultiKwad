@@ -17,7 +17,7 @@
     <string name="label_rc_throttle_expo">EXPO:</string>
     <string name="label_rc_pitch_roll_rate">RATE:</string>
     <string name="label_rc_pitch_roll_expo">EXPO:</string>
-    <string name="label_pitch_roll_rate">PRATE:</string>
+    <string name="label_roll_pitch_rate">RRATE:</string>
     <string name="label_yaw_rate">YRATE:</string>
     <string name="label_tpa_rate">TPA:</string>
     <string name="label_p">P</string>
