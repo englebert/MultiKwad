@@ -606,7 +606,7 @@
 
             <!-- Throttle Mid -->
             <TextView
-                android:id="@+id/labelRCThrottleMid"
+                android:id="@+id/labelThrottleMid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -616,12 +616,12 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editRCThrottleMidValue"
+                android:id="@+id/editThrottleMidValue"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/labelRCThrottleMid"
+                android:layout_alignTop="@+id/labelThrottleMid"
                 android:layout_marginLeft="20dp"
-                android:layout_toEndOf="@+id/labelRCThrottleMid"
+                android:layout_toEndOf="@+id/labelThrottleMid"
                 android:background="@drawable/rounded_corner_white"
                 android:inputType="numberDecimal"
                 android:text="@string/default_0_00"
@@ -631,23 +631,23 @@
 
             <!-- Throttle Expo -->
             <TextView
-                android:id="@+id/labelRCThrottleExpo"
+                android:id="@+id/labelThrottleExpo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:layout_below="@+id/labelRCThrottleMid"
+                android:layout_below="@+id/labelThrottleMid"
                 android:text="@string/label_rc_throttle_expo"
                 android:textColor="@color/colorBlack"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editRCThrottleExpoValue"
+                android:id="@+id/editThrottleExpoValue"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/labelRCThrottleExpo"
-                android:layout_alignLeft="@+id/editRCThrottleMidValue"
-                android:layout_toEndOf="@+id/labelRCThrottleExpo"
+                android:layout_alignTop="@+id/labelThrottleExpo"
+                android:layout_alignLeft="@+id/editThrottleMidValue"
+                android:layout_toEndOf="@+id/labelThrottleExpo"
                 android:background="@drawable/rounded_corner_white"
                 android:inputType="numberDecimal"
                 android:text="@string/default_0_00"
@@ -655,12 +655,12 @@
                 android:textColor="@color/colorBlack"
                 android:textSize="18sp" />
 
-            <!-- Pitch Roll -->
+            <!-- RC RATE -->
             <TextView
-                android:id="@+id/labelRCPitchRollRate"
+                android:id="@+id/labelRCRate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/labelRCThrottleExpo"
+                android:layout_below="@+id/labelThrottleExpo"
                 android:layout_marginTop="5dp"
                 android:text="@string/label_rc_pitch_roll_rate"
                 android:textColor="@color/colorBlack"
@@ -668,12 +668,12 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editRCPitchRollRateValue"
+                android:id="@+id/editRCRateValue"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/labelRCPitchRollRate"
-                android:layout_toEndOf="@+id/labelRCPitchRollRate"
-                android:layout_alignLeft="@+id/editRCThrottleExpoValue"
+                android:layout_alignTop="@+id/labelRCRate"
+                android:layout_toEndOf="@+id/labelRCRate"
+                android:layout_alignLeft="@+id/editThrottleExpoValue"
                 android:background="@drawable/rounded_corner_white"
                 android:inputType="numberDecimal"
                 android:text="@string/default_0_00"
@@ -682,23 +682,23 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/labelRCPitchRollExpo"
+                android:id="@+id/labelRCExpo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:layout_below="@+id/labelRCPitchRollRate"
+                android:layout_below="@+id/labelRCRate"
                 android:text="@string/label_rc_pitch_roll_expo"
                 android:textColor="@color/colorBlack"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editRCPitchRollExpoValue"
+                android:id="@+id/editRCExpoValue"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/labelRCPitchRollExpo"
-                android:layout_alignLeft="@+id/editRCPitchRollRateValue"
-                android:layout_toEndOf="@+id/labelRCPitchRollExpo"
+                android:layout_alignTop="@+id/labelRCExpo"
+                android:layout_alignLeft="@+id/editRCRateValue"
+                android:layout_toEndOf="@+id/labelRCExpo"
                 android:background="@drawable/rounded_corner_white"
                 android:inputType="numberDecimal"
                 android:text="@string/default_0_00"
@@ -722,24 +722,24 @@
 
             <!-- Roll and Pitch -->
             <TextView
-                android:id="@+id/labelPitchRollRate"
+                android:id="@+id/labelRollPitchRate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="@string/label_pitch_roll_rate"
+                android:text="@string/label_roll_pitch_rate"
                 android:textColor="@color/colorBlack"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editPitchRollRate"
+                android:id="@+id/editRollPitchRateValue"
                 android:background="@drawable/rounded_corner_white"
                 android:inputType="numberDecimal"
                 android:layout_marginStart="5dp"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/labelPitchRollRate"
-                android:layout_toEndOf="@+id/labelPitchRollRate"
+                android:layout_alignTop="@+id/labelRollPitchRate"
+                android:layout_toEndOf="@+id/labelRollPitchRate"
                 android:text="@string/default_0_00"
                 android:textAlignment="textEnd"
                 android:textColor="@color/colorBlack"
@@ -753,12 +753,12 @@
                 android:layout_marginTop="5dp"
                 android:text="@string/label_yaw_rate"
                 android:textColor="@color/colorBlack"
-                android:layout_below="@+id/labelPitchRollRate"
+                android:layout_below="@+id/labelRollPitchRate"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editYawRate"
+                android:id="@+id/editYawRateValue"
                 android:background="@drawable/rounded_corner_white"
                 android:inputType="numberDecimal"
                 android:layout_marginStart="5dp"
@@ -784,14 +784,14 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editTPARate"
+                android:id="@+id/editTPARateValue"
                 android:background="@drawable/rounded_corner_white"
                 android:inputType="numberDecimal"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/labelTPARate"
                 android:layout_toEndOf="@+id/labelTPARate"
-                android:layout_alignLeft="@+id/editYawRate"
+                android:layout_alignLeft="@+id/editYawRateValue"
                 android:text="@string/default_0_0"
                 android:textAlignment="textEnd"
                 android:textColor="@color/colorBlack"
