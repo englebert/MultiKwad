@@ -65,10 +65,11 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
             cycleTime, i2cError, version, versionMisMatch,horizonInstrSize, GPS_distanceToHome, GPS_directionToHome, GPS_numSat, GPS_fix,
             GPS_update, GPS_altitude, GPS_speed, GPS_latitude, GPS_longitude, init_com, graph_on, pMeterSum, intPowerTrigger, bytevbat;
 
-    int multiCapability = 0; // Bitflags stating what capabilities are/are not present in the compiled code.
-    int byteMP[] = new int[8];  // Motor Pins.  Varies by multiType and Arduino model (pro Mini, Mega, etc).
-    int MConf[]  = new int[10]; // Min/Maxthro etc
-    int byteP[] = new int[PIDITEMS], byteI[] = new int[PIDITEMS], byteD[] = new int[PIDITEMS];
+    int msp_version      = 0;
+    int multiCapability  = 0;           // Bitflags stating what capabilities are/are not present in the compiled code.
+    int byteMP[]         = new int[8];  // Motor Pins.  Varies by multiType and Arduino model (pro Mini, Mega, etc).
+    int MConf[]          = new int[10]; // Min/Maxthro etc
+    int byteP[]          = new int[PIDITEMS], byteI[] = new int[PIDITEMS], byteD[] = new int[PIDITEMS];
     int activation[];
     int ServoMID[]       = new int[8];  // Plane,ppm/pwm conv,heli
     int servoRATE[]      = new int[8];
@@ -156,6 +157,11 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
             MSP_DEBUGMSG         = 253,
             MSP_DEBUG            = 254;
 
+    // All the labels in this UI
+    TextView
+            labelVersion = null,
+            labelQuadType = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -237,7 +243,6 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
         button_exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                bt.stopService();
                 finish();
             }
         });
@@ -250,6 +255,10 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
                 readMultiWiiConfig();
             }
         });
+
+        // Setting up Labels and EditViews
+        labelVersion = (TextView) findViewById(R.id.labelVersion);
+        labelQuadType = (TextView) findViewById(R.id.labelQuadType);
 
         // If there is no connection had made, lets trigger it here
         if(!connectionStatus) {
@@ -471,28 +480,112 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
 
     }
 
+    @Override
+    public void onDestroy() {
+        bt.disconnect();
+        bt.stopAutoConnect();
+        bt.stopService();
 
-    private void processCommand(byte cmd, int dataSize) {
-        int i;
-        int icmd = (int)(cmd & 0xff);
-        switch (icmd) {
-            case MSP_IDENT:
-                version = read8();
-                multiType = read8();
-                read8(); // MSP version
-                multiCapability = read32(); // capability
-                /* Temporary remark. Later see how to convert it
-                if ((multiCapability&1)>0) {buttonRXbind = controlP5.addButton("bRXbind",1,10,yGraph+205-10,55,10); buttonRXbind.setColorBackground(blue_);buttonRXbind.setLabel("RX Bind");}
-                if ((multiCapability&4)>0) controlP5.addTab("Motors").show();
-                if ((multiCapability&8)>0) flaps=true;
-                if (!GraphicsInited)  create_ServoGraphics();
-                */
-                Log.d(LOGID, "Version: " + version + ", MultiType: " + multiType + ", MultiCapability: " + multiCapability);
+        super.onDestroy();
+    }
+
+    private void updateUI() {
+        // Updating version
+        labelVersion.setText("V: " + version);
+
+        // Updating MW Type
+        String mw_type = null;
+        switch(multiType) {
+            case TRI:
+                mw_type = "TRI";
+                break;
+
+            case QUADP:
+                mw_type = "QUADP";
+                break;
+
+            case QUADX:
+                mw_type = "QUADX";
+                break;
+
+            case BI:
+                mw_type = "BI";
+                break;
+
+            case GIMBAL:
+                mw_type = "GIMBAL";
+                break;
+
+            case Y6:
+                mw_type = "Y6";
+                break;
+
+            case HEX6:
+                mw_type = "HEX6";
+                break;
+
+            case FLYING_WING:
+                mw_type = "FLYING WING";
+                break;
+
+            case Y4:
+                mw_type = "Y4";
+                break;
+
+            case HEX6X:
+                mw_type = "HEX6";
+                break;
+
+            case OCTOX8:
+                mw_type = "OCTOX8";
+                break;
+
+            case OCTOFLATX:
+                mw_type = "OCTOFLATX";
+                break;
+
+            case OCTOFLATP:
+                mw_type = "OCTOFLATP";
+                break;
+
+            case AIRPLANE:
+                mw_type = "AIRPLANCE";
+                break;
+
+            case HELI_120_CCPM:
+                mw_type = "HELI_120_CCPM";
+                break;
+
+            case HELI_90_DEG:
+                mw_type = "HELI_90_DEG";
+                break;
+
+            case VTAIL4:
+                mw_type = "VTAIL4";
+                break;
+
+            case HEX6H:
+                mw_type = "HEX6H";
+                break;
+
+            case PPM_TO_SERVO:
+                mw_type = "PPM TO SERVO";
+                break;
+
+            case DUALCOPTER:
+                mw_type = "DUALCOPTER";
+                break;
+
+            case SINGLECOPTER:
+                mw_type = "SINGLE COPTER";
                 break;
 
             default:
-                Log.d(LOGID, "I don't know how to handle this -> " + icmd);
+                mw_type = "UNKNOWN";
+                break;
         }
+
+        labelQuadType.setText(mw_type);
     }
 
     private void loadFlightModeActivity() {
@@ -535,8 +628,38 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
     private void requestWii() {
         int[] requests = {MSP_IDENT ,MSP_BOXNAMES, MSP_RC_TUNING, MSP_PID, MSP_MOTOR_PINS,MSP_BOX,MSP_MISC};
         tx2Wii(MSP_IDENT, null);
-//        tx2Wii(MSP_BOXNAMES, null);
+        tx2Wii(MSP_BOXNAMES, null);
 //        tx2Wii(MSP_RC_TUNING, null);
+    }
+
+    // Incoming commands from Bluetooth / Serial cable
+    private void processCommand(byte cmd, int dataSize) {
+        int i;
+        int icmd = (int)(cmd & 0xff);
+        switch (icmd) {
+            case MSP_IDENT:
+                version = read8();
+                multiType = read8();
+                msp_version = read8(); // MSP version
+                multiCapability = read32(); // capability
+                /* Temporary remark. Later see how to convert it
+                if ((multiCapability&1)>0) {buttonRXbind = controlP5.addButton("bRXbind",1,10,yGraph+205-10,55,10); buttonRXbind.setColorBackground(blue_);buttonRXbind.setLabel("RX Bind");}
+                if ((multiCapability&4)>0) controlP5.addTab("Motors").show();
+                if ((multiCapability&8)>0) flaps=true;
+                if (!GraphicsInited)  create_ServoGraphics();
+                */
+                // Log.d(LOGID, "Version: " + version + ", MultiType: " + multiType + ", MultiCapability: " + multiCapability + ", MSP: " + msp_version);
+                updateUI();
+                break;
+
+            case MSP_BOXNAMES:
+                Log.d(LOGID, "MSP_BOXNAMES: " + new String(inBuf, 0, dataSize));
+                updateUI();
+                break;
+
+            default:
+                Log.d(LOGID, "I don't know how to handle this -> " + icmd);
+        }
     }
 
     private void tx2Wii(int code, String data) {

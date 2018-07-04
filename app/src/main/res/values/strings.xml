@@ -1,7 +1,9 @@
 <resources>
     <!-- Main Screen -->
     <string name="app_name">MultiKwad Configuration Tool</string>
-    <string name="label_profile_id">Profile ID: XXX</string>
+    <string name="label_profile_id">Profile ID: X</string>
+    <string name="label_version">v:000</string>
+    <string name="label_quad_type">Unknown</string>
     <string name="label_roll">ROLL:</string>
     <string name="label_pitch">PITCH:</string>
     <string name="label_yaw">YAW:</string>
