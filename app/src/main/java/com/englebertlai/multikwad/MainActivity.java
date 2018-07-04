@@ -14,6 +14,7 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -161,7 +162,21 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
     TextView
             labelVersion = null,
             labelQuadType = null;
-
+    
+    EditText
+            editRollPValue, editRollIValue, editRollDValue,
+            editPitchPValue, editPitchIValue, editPitchDValue,
+            editYawPValue, editYawIValue, editYawDValue,
+            editAltPValue, editAltIValue, editAltDValue,
+            editPosPValue, editPosIValue,
+            editPosRPValue, editPosRIValue, editPosRDValue,
+            editNavRPValue, editNavRIValue, editNavRDValue,
+            editLevelPValue, editLevelIValue, editLevelDValue,
+            editMagPValue,
+            editThrottleMidValue, editThrottleExpoValue,
+            editRCRateValue, editRCExpoValue,
+            editRollPitchRateValue, editYawRateValue, editTPARateValue;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -259,6 +274,61 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
         // Setting up Labels and EditViews
         labelVersion = (TextView) findViewById(R.id.labelVersion);
         labelQuadType = (TextView) findViewById(R.id.labelQuadType);
+
+        // Roll
+        editRollPValue = (EditText) findViewById(R.id.editRollPValue);
+        editRollIValue = (EditText) findViewById(R.id.editRollIValue);
+        editRollDValue = (EditText) findViewById(R.id.editRollDValue);
+
+        // Pitch
+        editPitchPValue = (EditText) findViewById(R.id.editPitchPValue);
+        editPitchIValue = (EditText) findViewById(R.id.editPitchIValue);
+        editPitchDValue = (EditText) findViewById(R.id.editPitchDValue);
+        
+        // Yaw
+        editYawPValue = (EditText) findViewById(R.id.editYawPValue);
+        editYawIValue = (EditText) findViewById(R.id.editYawIValue);
+        editYawDValue = (EditText) findViewById(R.id.editYawDValue);
+        
+        // Alt
+        editAltPValue = (EditText) findViewById(R.id.editAltPValue);
+        editAltIValue = (EditText) findViewById(R.id.editAltIValue);
+        editAltDValue = (EditText) findViewById(R.id.editAltDValue);
+
+        // Pos
+        editPosPValue = (EditText) findViewById(R.id.editPosPValue);
+        editPosIValue = (EditText) findViewById(R.id.editPosIValue);
+
+        // PosR
+        editPosRPValue = (EditText) findViewById(R.id.editPosRPValue);
+        editPosRIValue = (EditText) findViewById(R.id.editPosRIValue);
+        editPosRDValue = (EditText) findViewById(R.id.editPosRDValue);
+
+        // NavR
+        editNavRPValue = (EditText) findViewById(R.id.editNavRPValue);
+        editNavRIValue = (EditText) findViewById(R.id.editNavRIValue);
+        editNavRDValue = (EditText) findViewById(R.id.editNavRDValue);
+
+        // Level
+        editLevelPValue = (EditText) findViewById(R.id.editLevelPValue);
+        editLevelIValue = (EditText) findViewById(R.id.editLevelIValue);
+        editLevelDValue = (EditText) findViewById(R.id.editLevelDValue);
+
+        // Mag
+        editMagPValue = (EditText) findViewById(R.id.editMagPValue);
+
+        // ThrottleMid & ThrottleExpo
+        editThrottleMidValue = (EditText) findViewById(R.id.editThrottleMidValue);
+        editThrottleExpoValue = (EditText) findViewById(R.id.editThrottleExpoValue);
+
+        // RC Rate & RC Expo
+        editRCRateValue = (EditText) findViewById(R.id.editRCRateValue);
+        editRCExpoValue = (EditText) findViewById(R.id.editRCExpoValue);
+
+        // RollPitch, Yaw and TPA
+        editRollPitchRateValue = (EditText) findViewById(R.id.editRollPitchRateValue);
+        editYawRateValue = (EditText) findViewById(R.id.editYawRateValue);
+        editTPARateValue = (EditText) findViewById(R.id.editTPARateValue);
 
         // If there is no connection had made, lets trigger it here
         if(!connectionStatus) {
@@ -629,12 +699,13 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
         int[] requests = {MSP_IDENT ,MSP_BOXNAMES, MSP_RC_TUNING, MSP_PID, MSP_MOTOR_PINS,MSP_BOX,MSP_MISC};
         tx2Wii(MSP_IDENT, null);
         tx2Wii(MSP_BOXNAMES, null);
+        tx2Wii(MSP_RC_TUNING, null);
+        tx2Wii(MSP_PID, null);
 //        tx2Wii(MSP_RC_TUNING, null);
     }
 
     // Incoming commands from Bluetooth / Serial cable
     private void processCommand(byte cmd, int dataSize) {
-        int i;
         int icmd = (int)(cmd & 0xff);
         switch (icmd) {
             case MSP_IDENT:
@@ -654,6 +725,111 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
 
             case MSP_BOXNAMES:
                 Log.d(LOGID, "MSP_BOXNAMES: " + new String(inBuf, 0, dataSize));
+                updateUI();
+                break;
+
+            case MSP_MOTOR_PINS:
+                for(int i = 0; i < 8; i++) {
+                    byteMP[i] = read8();
+                }
+                break;
+
+            case MSP_RC_TUNING:
+                byteRC_RATE = read8();
+                byteRC_EXPO = read8();
+                byteRollPitchRate = read8();
+                byteYawRate = read8();
+                byteDynThrPID = read8();
+                byteThrottle_MID = read8();
+                byteThrottle_EXPO = read8();
+
+                // RC Throttle Rate
+                editThrottleMidValue.setText(String.valueOf(byteThrottle_MID/100.0));
+                editThrottleExpoValue.setText(String.valueOf(byteThrottle_EXPO/100.0));
+
+                // RC RATE
+                editRCRateValue.setText(String.valueOf(byteRC_RATE/100.0));
+                editRCExpoValue.setText(String.valueOf(byteRC_EXPO/100.0));
+
+                // Roll Pitch Yaw Throttle Rate
+                editRollPitchRateValue.setText(String.valueOf(byteRollPitchRate/100.0));
+                editYawRateValue.setText(String.valueOf(byteYawRate/100.0));
+                editTPARateValue.setText(String.valueOf(byteDynThrPID/100.0));
+
+                break;
+
+            case MSP_PID:
+                for(int i = 0; i < PIDITEMS; i++) {
+                    byteP[i] = read8();
+                    byteI[i] = read8();
+                    byteD[i] = read8();
+
+                    switch (i){
+                        // PID: Roll
+                        case 0:
+                            editRollPValue.setText(String.valueOf(byteP[i]/10.0));
+                            editRollIValue.setText(String.valueOf(byteI[i]/1000.0));
+                            editRollDValue.setText(String.valueOf(byteD[i]));
+                            break;
+                            
+                        // PID: Pitch
+                        case 1:
+                            editPitchPValue.setText(String.valueOf(byteP[i]/10.0));
+                            editPitchIValue.setText(String.valueOf(byteI[i]/1000.0));
+                            editPitchDValue.setText(String.valueOf(byteD[i]));
+                            break;
+                         
+                        // PID: Yaw
+                        case 2:
+                            editYawPValue.setText(String.valueOf(byteP[i]/10.0));
+                            editYawIValue.setText(String.valueOf(byteI[i]/1000.0));
+                            editYawDValue.setText(String.valueOf(byteD[i]));
+                            break;
+
+                        // PID: Alt
+                        case 3:
+                            editAltPValue.setText(String.valueOf(byteP[i]/10.0));
+                            editAltIValue.setText(String.valueOf(byteI[i]/1000.0));
+                            editAltDValue.setText(String.valueOf(byteD[i]));
+                            break;
+
+                        // PID: Level
+                        case 7:
+                            editLevelPValue.setText(String.valueOf(byteP[i]/10.0));
+                            editLevelIValue.setText(String.valueOf(byteI[i]/1000.0));
+                            editLevelDValue.setText(String.valueOf(byteD[i]));
+                            break;
+                            
+                        case 8:
+                            editMagPValue.setText(String.valueOf(byteP[i]/10.0));
+                            break;
+
+                        case 9:
+                            Log.d(LOGID, "PID DEBUG: P[" + String.valueOf(byteP[i]/10.0) + "] I[" + String.valueOf(byteI[i]/1000.0) + "] D[" + String.valueOf(byteP[i]) + "]");
+                            break;
+
+                        // Different rates for POS-4 POSR-5 NAVR-6
+                        // PID: Pos
+                        case 4:
+                            editPosPValue.setText(String.valueOf(byteP[i]/100.0));
+                            editPosIValue.setText(String.valueOf(byteI[i]/100.0));
+                            break;
+                        
+                        // PID: PosR
+                        case 5:
+                            editPosRPValue.setText(String.valueOf(byteP[i]/10.0));
+                            editPosRIValue.setText(String.valueOf(byteI[i]/100.0));
+                            editPosRDValue.setText(String.valueOf(byteD[i]/1000.0));
+                            break;
+                            
+                        // PID: NavR
+                        case 6:
+                            editNavRPValue.setText(String.valueOf(byteP[i]/10.0));
+                            editNavRIValue.setText(String.valueOf(byteI[i]/100.0));
+                            editNavRDValue.setText(String.valueOf(byteD[i]/1000.0));
+                            break;
+                    }
+                }
                 updateUI();
                 break;
 
