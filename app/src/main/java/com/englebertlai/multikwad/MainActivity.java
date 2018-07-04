@@ -48,6 +48,9 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
             HEADER_CMD = 5,
             HEADER_ERR = 6;
 
+    private static final int
+            MAX_PROFILE = 3;
+
     private int c_state = IDLE;
     boolean err_rcvd = false;
     byte checksum=0;
@@ -66,6 +69,9 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
             cycleTime, i2cError, version, versionMisMatch,horizonInstrSize, GPS_distanceToHome, GPS_directionToHome, GPS_numSat, GPS_fix,
             GPS_update, GPS_altitude, GPS_speed, GPS_latitude, GPS_longitude, init_com, graph_on, pMeterSum, intPowerTrigger, bytevbat;
 
+    int profile          = 0;
+    int present          = 0;
+
     int msp_version      = 0;
     int multiCapability  = 0;           // Bitflags stating what capabilities are/are not present in the compiled code.
     int byteMP[]         = new int[8];  // Motor Pins.  Varies by multiType and Arduino model (pro Mini, Mega, etc).
@@ -80,7 +86,6 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
     int wingDir[]        = new int[8];  // Flying wing
     int wingPos[]        = new int[8];
     int In[]             = new int[8];
-
 
     boolean toggleRead = false,
             toggleReset = false,
@@ -161,7 +166,8 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
     // All the labels in this UI
     TextView
             labelVersion = null,
-            labelQuadType = null;
+            labelQuadType = null,
+            labelProfileID = null;
     
     EditText
             editRollPValue, editRollIValue, editRollDValue,
@@ -207,7 +213,7 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
 
     @Override
     public void onDoubleTap() {
-        Toast.makeText(this, "Double Tap", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Double Tap", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -272,6 +278,17 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
         });
 
         // Setting up Labels and EditViews
+        labelProfileID = (TextView) findViewById(R.id.labelProfileID);
+        labelProfileID.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                profile++;
+                if(profile >= MAX_PROFILE) profile = 0;
+
+                tx2Wii(MSP_SELECT_SETTING, String.valueOf((char)profile));
+                requestWii();
+            }
+        });
         labelVersion = (TextView) findViewById(R.id.labelVersion);
         labelQuadType = (TextView) findViewById(R.id.labelQuadType);
 
@@ -560,6 +577,9 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
     }
 
     private void updateUI() {
+        // Updating Profile ID
+        labelProfileID.setText("Profile ID: " + profile);
+
         // Updating version
         labelVersion.setText("V: " + version);
 
@@ -698,6 +718,7 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
     private void requestWii() {
         int[] requests = {MSP_IDENT ,MSP_BOXNAMES, MSP_RC_TUNING, MSP_PID, MSP_MOTOR_PINS,MSP_BOX,MSP_MISC};
         tx2Wii(MSP_IDENT, null);
+        tx2Wii(MSP_STATUS, null);
         tx2Wii(MSP_BOXNAMES, null);
         tx2Wii(MSP_RC_TUNING, null);
         tx2Wii(MSP_PID, null);
@@ -726,6 +747,31 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
             case MSP_BOXNAMES:
                 Log.d(LOGID, "MSP_BOXNAMES: " + new String(inBuf, 0, dataSize));
                 updateUI();
+                break;
+
+            case MSP_STATUS:
+                cycleTime = read16();
+                i2cError = read16();
+                present = read16();
+                mode = read32();
+                /*
+                    if ((present&1) >0) {buttonAcc.setColorBackground(green_);} else {buttonAcc.setColorBackground(red_);tACC_ROLL.setState(false); tACC_PITCH.setState(false); tACC_Z.setState(false);}
+                    if ((present&2) >0) {buttonBaro.setColorBackground(green_);} else {buttonBaro.setColorBackground(red_); tBARO.setState(false); }
+                    if ((present&4) >0) {buttonMag.setColorBackground(green_); Mag_=true;} else {buttonMag.setColorBackground(red_); tMAGX.setState(false); tMAGY.setState(false); tMAGZ.setState(false);}
+                    if ((present&8) >0) {buttonGPS.setColorBackground(green_);} else {buttonGPS.setColorBackground(red_); tHEAD.setState(false);}
+                    if ((present&16)>0) {buttonSonar.setColorBackground(green_);} else {buttonSonar.setColorBackground(red_);}
+
+                    for(i=0;i<CHECKBOXITEMS;i++) {if ((mode&(1<<i))>0) buttonCheckbox[i].setColorBackground(green_); else buttonCheckbox[i].setColorBackground(red_);}
+                    confSetting.setValue(read8());
+                    confSetting.setColorBackground(green_);
+                 */
+                profile = read8();
+
+                updateUI();
+
+                break;
+
+            case MSP_SELECT_SETTING:
                 break;
 
             case MSP_MOTOR_PINS:
