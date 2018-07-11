@@ -277,6 +277,33 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
             }
         });
 
+        // Setting up Reset Button
+        Button button_reset = (Button) findViewById(R.id.button_reset);
+        button_reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                resetMultiiWiiConfig();
+            }
+        });
+
+        // Calibrate Accelerometer
+        Button button_calibrate_acc = (Button) findViewById(R.id.button_calibrate_acc);
+        button_calibrate_acc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calibrate_accelerometer();
+            }
+        });
+
+        // Calibrate Magnetometer
+        Button button_calibrate_mag = (Button) findViewById(R.id.button_calibrate_mag);
+        button_calibrate_acc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calibrate_magnetometer();
+            }
+        });
+
         // Setting up Labels and EditViews
         labelProfileID = (TextView) findViewById(R.id.labelProfileID);
         labelProfileID.setOnClickListener(new View.OnClickListener() {
@@ -285,7 +312,7 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
                 profile++;
                 if(profile >= MAX_PROFILE) profile = 0;
 
-                tx2Wii(MSP_SELECT_SETTING, String.valueOf((char)profile));
+                tx2Wii(generatePayload(MSP_SELECT_SETTING, String.valueOf((char)profile)));
                 requestWii();
             }
         });
@@ -523,6 +550,7 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
                 switch (state) {
                     case BluetoothState.STATE_CONNECTED:
                         Toast.makeText(main_activity_context, "BT Connected", Toast.LENGTH_SHORT).show();
+                        requestWii();
                         break;
 
                     case BluetoothState.STATE_CONNECTING:
@@ -691,6 +719,19 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
         requestWii();
     }
 
+    private void resetMultiiWiiConfig() {
+        tx2Wii(generatePayload(MSP_RESET_CONF, null));
+        requestWii();
+    }
+
+    private void calibrate_accelerometer() {
+        tx2Wii(generatePayload(MSP_ACC_CALIBRATION, null));
+    }
+
+    private void calibrate_magnetometer() {
+        tx2Wii(generatePayload(MSP_MAG_CALIBRATION, null));
+    }
+
     /*
      * Request Message to MultiWii:
      * $M<[data length][code][data][checksum]
@@ -716,13 +757,12 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
      */
 
     private void requestWii() {
-        int[] requests = {MSP_IDENT ,MSP_BOXNAMES, MSP_RC_TUNING, MSP_PID, MSP_MOTOR_PINS,MSP_BOX,MSP_MISC};
-        tx2Wii(MSP_IDENT, null);
-        tx2Wii(MSP_STATUS, null);
-        tx2Wii(MSP_BOXNAMES, null);
-        tx2Wii(MSP_RC_TUNING, null);
-        tx2Wii(MSP_PID, null);
-//        tx2Wii(MSP_RC_TUNING, null);
+        // int[] requests = {MSP_IDENT ,MSP_BOXNAMES, MSP_RC_TUNING, MSP_PID, MSP_MOTOR_PINS,MSP_BOX,MSP_MISC};
+        tx2Wii(generatePayload(MSP_IDENT, null));
+        tx2Wii(generatePayload(MSP_STATUS, null));
+        tx2Wii(generatePayload(MSP_BOXNAMES, null));
+        tx2Wii(generatePayload(MSP_RC_TUNING, null));
+        tx2Wii(generatePayload(MSP_PID, null));
     }
 
     // Incoming commands from Bluetooth / Serial cable
@@ -772,6 +812,14 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
                 break;
 
             case MSP_SELECT_SETTING:
+                break;
+
+            case MSP_ACC_CALIBRATION:
+                Toast.makeText(this, "Accelerometer Calibration Done", Toast.LENGTH_SHORT).show();
+                break;
+
+            case MSP_MAG_CALIBRATION:
+                Toast.makeText(this, "Magnetometer Calibration Done", Toast.LENGTH_SHORT).show();
                 break;
 
             case MSP_MOTOR_PINS:
@@ -884,8 +932,8 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
         }
     }
 
-    private void tx2Wii(int code, String data) {
-        if(code == 0) return;
+    private List<Byte> generatePayload(int code, String data) {
+        if(code == 0) return null;
 
         List<Byte> total_data = new LinkedList<Byte>();
         String MSP_HEADER = "$M<";
@@ -911,9 +959,25 @@ public class MainActivity extends AppCompatActivity implements SimpleGestureFilt
         }
 
         total_data.add(checksum);
+
+        return total_data;
 //        Log.d(LOGID, "TX2WII: " + total_data.toString());
 //        Log.d(LOGID, "TX2WII checksum: " + checksum);
 
+        /*
+        // Convert to byte from Bytes
+        byte[] command = new byte[total_data.size()];
+        int i = 0;
+        for(byte b : total_data) {
+            command[i++] = b;
+            // Log.d(LOGID, "OUT: " + b);
+        }
+
+        bt.send(command, false);
+        */
+    }
+
+    private void tx2Wii(List<Byte> total_data) {
         // Convert to byte from Bytes
         byte[] command = new byte[total_data.size()];
         int i = 0;
